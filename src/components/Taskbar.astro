@@ -1,0 +1,143 @@
+<script>
+  function updateClock() {
+  const now = new Date();
+  let hours = now.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  hours = hours.toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  document.getElementById('taskbar-clock').textContent = `${hours}:${minutes} ${ampm}`;
+}
+
+// Update clock every minute
+setInterval(updateClock, 1000);
+updateClock();
+
+</script>
+
+
+
+<div class="taskbar">
+  <div class="taskbar-icons">
+    <div class="icon">
+      <img src="start-icon.png" alt="Start">
+    </div>
+    <div class="icon">
+      <img src="app-icon1.png" alt="App">
+    </div>
+    <div class="icon">
+      <img src="app-icon2.png" alt="App">
+    </div>
+    <!-- Add more icons as needed -->
+  </div>
+  <div class="taskbar-clock" id="taskbar-clock">
+  </div>
+</div>
+
+
+<style>
+  :root {
+  --taskbar-height: 40px;
+  --taskbar-border-color: rgba(0, 0, 0, 0.7); /* Border from your original "window glass" */
+  --taskbar-background-color: rgba(69, 128, 196, 0.1); /* Blue hue for glass effect */
+  --taskbar-glass-stripes: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 70px,
+      transparent 100px
+    ),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.1) 70px, transparent 100px);
+  --taskbar-blur: blur(10px); /* Same blur as "window glass" */
+  --taskbar-icon-size: 24px;
+  --taskbar-icon-spacing: 10px;
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--taskbar-height);
+  background: var(--taskbar-background-color);
+  backdrop-filter: var(--taskbar-blur); /* Glassy blur effect */
+  border-top: 1px solid var(--taskbar-border-color);
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.4); /* Removed inset shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  z-index: 1000;
+  background-image: var(--taskbar-glass-stripes), var(--taskbar-background-color);
+  background-blend-mode: overlay;
+  background-clip: padding-box;
+  border-radius: 4px; /* Less rounded corners */
+}
+
+.taskbar-icons {
+  display: flex;
+  align-items: center;
+}
+
+.taskbar-icons .icon {
+  width: var(--taskbar-icon-size);
+  height: var(--taskbar-icon-size);
+  margin-right: var(--taskbar-icon-spacing);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px; /* Reduced rounding for icons */
+  background-color: rgba(255, 255, 255, 0.2); /* Similar glassy background */
+  transition: background-color 0.2s ease;
+}
+
+.taskbar-icons .icon:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* Brighten on hover for consistency */
+}
+
+.taskbar-icons .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.taskbar-clock {
+  color: #fff;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  padding-right: 15px;
+}
+
+/* Pseudo elements for glass effect */
+.taskbar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px; /* Less rounding */
+  background: linear-gradient(transparent 20%, #ffffffb3 40%, transparent 41%),
+    var(--taskbar-background-color);
+  box-shadow: none; /* Removed the inset shadow to prevent the weird line */
+  opacity: 0.6; /* Same opacity as the "window glass" */
+  pointer-events: none;
+}
+
+.taskbar::after {
+  content: "";
+  position: absolute;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px; /* Less rounding */
+  border: none;
+  backdrop-filter: blur(4px); /* Matching "window glass" style */
+  background: var(--taskbar-glass-stripes);
+  opacity: 0.4; /* Slight stripe effect similar to the "window glass" */
+}
+
+</style>

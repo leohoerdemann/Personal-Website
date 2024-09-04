@@ -1,0 +1,32 @@
+---
+const links = [
+  { name: 'About Me', url: '/about' },
+  { name: 'Portfolio', url: '/portfolio' },
+  // Add more links as needed
+];
+---
+
+<div class="mobile-layout">
+  {links.map(link => (
+    <a href={link.url} class="mobile-link">{link.name}</a>
+  ))}
+</div>
+
+<style>
+  .mobile-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .mobile-link {
+    margin: 10px 0;
+    padding: 15px 25px;
+    background-color: #0078d7;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 80%;
+  }
+</style>

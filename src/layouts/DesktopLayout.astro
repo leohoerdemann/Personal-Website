@@ -1,0 +1,31 @@
+---
+import DesktopIcon from '../components/DesktopIcon.astro';
+import Window from '../components/Window.astro';
+import Taskbar from '../components/Taskbar.astro';
+import User from '../Content/User.astro';
+---
+
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/7.css"/>
+    <script src="../Scripts/WindowStates/Drag.js"></script>
+</head>
+<body>
+    <div class="desktop">
+        <Window title="User"> 
+          <User />
+        </Window>
+        <Taskbar />
+    </div>
+</body>
+
+<style>
+  body {
+    background-image: url('WallPaper.jpg');
+    background-size: cover;
+    overflow: hidden;
+  }
+  </style>
+</html>
