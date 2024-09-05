@@ -1,6 +1,8 @@
 ---
 import DesktopLayout from '../layouts/DesktopLayout.astro';
 import MobileLayout from '../layouts/MobileLayout.astro';
+
+const isMobile = false;
 ---
 
 <head>
@@ -9,30 +11,4 @@ import MobileLayout from '../layouts/MobileLayout.astro';
 </head>
 
 
-
-<style>
-  @media (max-width: 768px) {
-    .desktop-layout {
-      display: none;
-    }
-    .mobile-layout {
-      display: block;
-    }
-  }
-  @media (min-width: 769px) {
-    .desktop-layout {
-      display: block;
-    }
-    .mobile-layout {
-      display: none;
-    }
-  }
-</style>
-
-<div class="desktop-layout">
-  <DesktopLayout />
-</div>
-
-<div class="mobile-layout">
-  <MobileLayout />
-</div>
+<DesktopLayout />

@@ -20,13 +20,13 @@ updateClock();
 <div class="taskbar">
   <div class="taskbar-icons">
     <div class="icon">
-      <img src="start-icon.png" alt="Start">
+      <img src="/Icons/world.png" alt="Start">
     </div>
     <div class="icon">
-      <img src="app-icon1.png" alt="App">
+      <img src="/Icons/user.png" alt="App">
     </div>
     <div class="icon">
-      <img src="app-icon2.png" alt="App">
+      <img src="/Icons/document.png" alt="App">
     </div>
     <!-- Add more icons as needed -->
   </div>
@@ -37,18 +37,18 @@ updateClock();
 
 <style>
   :root {
-  --taskbar-height: 40px;
-  --taskbar-border-color: rgba(0, 0, 0, 0.7); /* Border from your original "window glass" */
-  --taskbar-background-color: rgba(69, 128, 196, 0.1); /* Blue hue for glass effect */
+  --taskbar-height: 45px; /* Adjust as needed to fit your icons */
+  --taskbar-border-color: rgba(0, 0, 0, 0.7); /* Matching border from title bar */
+  --taskbar-background-color: rgba(69, 128, 196, 0.25); /* Blue tint from the title bar glass effect */
   --taskbar-glass-stripes: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0.1) 70px,
       transparent 100px
     ),
     linear-gradient(225deg, rgba(255, 255, 255, 0.1) 70px, transparent 100px);
-  --taskbar-blur: blur(10px); /* Same blur as "window glass" */
-  --taskbar-icon-size: 24px;
-  --taskbar-icon-spacing: 10px;
+  --taskbar-blur: blur(7px); /* Same blur as in the title bar */
+  --taskbar-icon-size: 40px; /* Icon size to fill the taskbar */
+  --taskbar-icon-spacing: 12px; /* Spacing for icons */
 }
 
 .taskbar {
@@ -58,18 +58,18 @@ updateClock();
   width: 100%;
   height: var(--taskbar-height);
   background: var(--taskbar-background-color);
-  backdrop-filter: var(--taskbar-blur); /* Glassy blur effect */
-  border-top: 1px solid var(--taskbar-border-color);
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.4); /* Removed inset shadow */
+  backdrop-filter: var(--taskbar-blur); /* Exact glass blur from title bar */
+  border-top: 1px solid var(--taskbar-border-color); /* Top border for clean edge */
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3); /* Shadow to lift the taskbar */
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
+  align-items: center; /* Centering icons and clock */
+  padding: 0 8px;
   z-index: 1000;
   background-image: var(--taskbar-glass-stripes), var(--taskbar-background-color);
   background-blend-mode: overlay;
   background-clip: padding-box;
-  border-radius: 4px; /* Less rounded corners */
+  border-radius: 0px; /* Slightly less rounded corners like the title bar */
 }
 
 .taskbar-icons {
@@ -85,13 +85,13 @@ updateClock();
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 2px; /* Reduced rounding for icons */
-  background-color: rgba(255, 255, 255, 0.2); /* Similar glassy background */
+  border-radius: 2px; /* Minimal rounding for icons */
+  background-color: rgba(255, 255, 255, 0); /* Light glassy background for icons */
   transition: background-color 0.2s ease;
 }
 
 .taskbar-icons .icon:hover {
-  background-color: rgba(255, 255, 255, 0.4); /* Brighten on hover for consistency */
+  background-color: rgba(255, 255, 255, 0.4); /* Slight hover effect */
 }
 
 .taskbar-icons .icon img {
@@ -106,9 +106,11 @@ updateClock();
   font-family: "Segoe UI", sans-serif;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   padding-right: 15px;
+  display: flex;
+  align-items: center; /* Centering clock */
 }
 
-/* Pseudo elements for glass effect */
+/* Exact glass effect from the title bar */
 .taskbar::before {
   content: "";
   position: absolute;
@@ -117,11 +119,11 @@ updateClock();
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 4px; /* Less rounding */
-  background: linear-gradient(transparent 20%, #ffffffb3 40%, transparent 41%),
+  background: linear-gradient(transparent 20%, #ffffff16 80%, transparent 100%),
     var(--taskbar-background-color);
-  box-shadow: none; /* Removed the inset shadow to prevent the weird line */
-  opacity: 0.6; /* Same opacity as the "window glass" */
+  box-shadow: inset 0 0 0 1px #fffd; /* Inset shadow like the title bar */
+  border-radius: 0px; /* Same as the taskbar */
+  opacity: 0.6; /* Glass opacity from title bar */
   pointer-events: none;
 }
 
@@ -133,11 +135,11 @@ updateClock();
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 4px; /* Less rounding */
+  border-radius: 4px;
   border: none;
-  backdrop-filter: blur(4px); /* Matching "window glass" style */
+  backdrop-filter: blur(4px); /* Light blur behind the glass */
   background: var(--taskbar-glass-stripes);
-  opacity: 0.4; /* Slight stripe effect similar to the "window glass" */
+  opacity: 0.3; /* Soft stripe effect */
 }
 
 </style>
