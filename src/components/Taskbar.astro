@@ -4,9 +4,12 @@
   let hours = now.getHours();
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours = hours % 12 || 12;
-  hours = hours.toString().padStart(2, '0');
+  hours = parseInt(hours.toString().padStart(2, '0'), 10);
   const minutes = now.getMinutes().toString().padStart(2, '0');
-  document.getElementById('taskbar-clock').textContent = `${hours}:${minutes} ${ampm}`;
+  const taskbarClock = document.getElementById('taskbar-clock');
+  if (taskbarClock !== null) {
+    taskbarClock.textContent = `${hours}:${minutes} ${ampm}`;
+  }
 }
 
 // Update clock every minute
