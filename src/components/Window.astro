@@ -1,11 +1,10 @@
 ---
 // Props for component
-const { title = "New Window", Width = "12"} = Astro.props;
+const { title = "New Window", Width = "12", x ,y} = Astro.props;
 
-const Style = "width: " + Width + "vw;";
 ---
 
-<div class="window glass draggable" style= {Style}>
+<div class="window glass draggable" style= {`width: ${Width}vw; left: ${x}px; top: ${y}px;`}>
     <div class="title-bar">
       <div class="title-bar-text">{ title }</div>
       <div class="title-bar-controls">

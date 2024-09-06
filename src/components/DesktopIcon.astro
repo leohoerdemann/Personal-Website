@@ -1,1 +1,7 @@
+---
+const { icon, name, x, y, link} = Astro.props;
+---
 
+<div class="desktop-icon" style={`left: ${x}px; top: ${y}px;`}>
+    <img src={icon} alt={name} />
+</div> 
