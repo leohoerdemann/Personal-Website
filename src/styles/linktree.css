@@ -13,14 +13,14 @@ body {
 .container {
   text-align: center;
   width: 100%;
-  margin-top: 20px;
-  padding: 0 15px; /* Adjust padding to avoid overflow */
-  box-sizing: border-box; /* Ensure padding doesn’t cause overflow */
+  margin-top: 30px;
+  padding: 0 5px;
+  box-sizing: border-box;
 }
 
 .profile-photo {
-  width: 6rem;
-  height: 6rem;
+  width: 6.5rem;
+  height: 6.5rem;
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
@@ -29,15 +29,15 @@ body {
 }
 
 .title {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
+  font-size: 1.75rem;
+  margin-bottom: 20px;
 }
 
 /* Buttons Section */
 .links-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   margin-bottom: 50px;
   width: 100%;
   align-items: center;
@@ -46,34 +46,29 @@ body {
 .link-btn {
   background-color: #fff;
   color: #2c2c2c;
-  padding: 1.25rem;
+  padding: 1.35rem;
   text-decoration: none;
   border-radius: 12px;
-  font-size: calc(1rem + 0.5vw); /* Responsive font size */
+  font-size: calc(1.1rem + .5vw); /* Responsive font size */
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease;
+  justify-content: center; /* Keeps the text centered */
   width: 100%;
-  max-width: 33.33vw;
+  max-width: 600px; /* Maximum width */
   margin: 0 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  box-sizing: border-box; /* Prevents padding from affecting button width */
+  position: relative;
+  box-sizing: border-box;
 }
 
 .link-btn .icon {
-  position: absolute;
-  left: 20px;
+  margin-right: 10px;
   width: 2.5rem;
   height: 2.5rem;
-  flex-shrink: 0;
+  position: absolute;
+  left: 10px; /* Align icon to the far left */
 }
 
 .link-btn:hover {
-  transform: scale(1.05);
   background-color: #f0f0f0;
 }
 
@@ -131,31 +126,8 @@ body {
 }
 
 /* Mobile Styles */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 5px; /* Less padding on mobile to avoid cutoff */
-  }
-
+@media (max-width: 600px) {
   .link-btn {
-    max-width: 100%;
-    width: 100%;
-    font-size: calc(1.2rem + 1vw); /* Slightly larger font on mobile */
-    padding: 1.5rem;
-    box-sizing: border-box; /* Ensures padding doesn’t cause overflow */
-  }
-
-  .link-btn .icon {
-    width: 2rem;
-    height: 2rem;
-    left: 15px;
-  }
-
-  .profile-photo {
-    width: 7rem;
-    height: 7rem;
-  }
-
-  .title {
-    font-size: 1.75rem;
+    max-width: 100%; /* Full width on mobile */
   }
 }
