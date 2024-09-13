@@ -1,48 +1,72 @@
-// Get the element that you want to resize
-const element = document.getElementById('your-element-id');
+// resize.js
+document.addEventListener('DOMContentLoaded', () => {
+    const resizableElements = document.querySelectorAll('.resize-handle');
+  
+    resizableElements.forEach(handle => {
+      handle.addEventListener('mousedown', (e) => {
+        const windowElement = handle.closest('.window');
 
-// Variables to store the initial mouse position and element dimensions
-let initialX;
-let initialY;
-let initialWidth;
-let initialHeight;
+        // Apply user-select: none to prevent text selection during resizing
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.msUserSelect = 'none';
 
-// Function to handle the mouse down event
-function handleMouseDown(event) {
-    // Store the initial mouse position
-    initialX = event.clientX;
-    initialY = event.clientY;
+        if (windowElement.dataset.maximized === 'true') {
+            windowElement.dataset.maximized = 'false';
+            windowElement.classList.add('draggable');
+        }
 
-    // Store the initial element dimensions
-    initialWidth = element.offsetWidth;
-    initialHeight = element.offsetHeight;
+        let initialX = e.clientX;
+        let initialY = e.clientY;
+        let initialWidth = parseInt(window.getComputedStyle(windowElement).width, 10);
+        let initialHeight = parseInt(window.getComputedStyle(windowElement).height, 10);
+  
+        function resize(e) {
+          if (handle.classList.contains('right')) {
+            windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
+          } else if (handle.classList.contains('left')) {
+            windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
+            windowElement.style.left = e.clientX + 'px';
+          } else if (handle.classList.contains('bottom')) {
+            windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
+          } else if (handle.classList.contains('top')) {
+            windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
+            windowElement.style.top = e.clientY + 'px';
+          }
 
-    // Attach the mouse move and mouse up event listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-}
+           // Handle diagonal resizing
+            if (handle.classList.contains('bottom-right')) {
+                windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
+                windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
+            } else if (handle.classList.contains('bottom-left')) {
+                windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
+                windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
+                windowElement.style.left = e.clientX + 'px';
+            } else if (handle.classList.contains('top-right')) {
+                windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
+                windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
+                windowElement.style.top = e.clientY + 'px';
+            } else if (handle.classList.contains('top-left')) {
+                windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
+                windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
+                windowElement.style.left = e.clientX + 'px';
+                windowElement.style.top = e.clientY + 'px';
+            }
+        }
+  
+        function stopResize() {
+           // Remove user-select styles when resizing ends
+            document.body.style.userSelect = '';
+            document.body.style.webkitUserSelect = '';
+            document.body.style.msUserSelect = '';
 
-// Function to handle the mouse move event
-function handleMouseMove(event) {
-    // Calculate the distance moved by the mouse
-    const deltaX = event.clientX - initialX;
-    const deltaY = event.clientY - initialY;
-
-    // Calculate the new element dimensions
-    const newWidth = initialWidth + deltaX;
-    const newHeight = initialHeight + deltaY;
-
-    // Update the element dimensions
-    element.style.width = newWidth + 'px';
-    element.style.height = newHeight + 'px';
-}
-
-// Function to handle the mouse up event
-function handleMouseUp() {
-    // Remove the mouse move and mouse up event listeners
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseup', handleMouseUp);
-}
-
-// Attach the mouse down event listener to the element
-element.addEventListener('mousedown', handleMouseDown);
+            window.removeEventListener('mousemove', resize);
+            window.removeEventListener('mouseup', stopResize);
+        }
+  
+        window.addEventListener('mousemove', resize);
+        window.addEventListener('mouseup', stopResize);
+      });
+    });
+  });
+  

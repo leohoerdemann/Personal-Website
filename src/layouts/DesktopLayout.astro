@@ -13,18 +13,51 @@ import AboutMe from '../Content/AboutMe.astro';
     <link rel="icon" href="Icons/user.png" />
     <link rel="stylesheet" href="https://unpkg.com/7.css"/>
     <script src="../Scripts/WindowStates/Drag.js"></script>
+    <script src= "../Scripts/WindowStates/open.js"></script>
+    <script src="../Scripts/WindowStates/close.js"></script>
+    <script src="../Scripts/WindowStates/resize.js"></script>
+    <script src="../Scripts/WindowStates/active.js"></script>
+    <script src="../Scripts/WindowStates/minimizeWindow.js"></script>
+    <script src="../Scripts/WindowStates/maximizeWindow.js"></script>
 </head>
 <body>
   <div class="desktop">
-      <Window title="User"> 
+    <!-- Desktop Icons -->
+    <DesktopIcon 
+      title="User" 
+      icon="Icons/user.png" 
+      windowId="User"
+    />
+
+
+
+
+
+    <!-- Windows -->
+      <Window 
+      title="User"
+      x="5"
+      y="5"
+      > 
         <User />
       </Window>
 
-      <Window title="About Me" Width="50">
+      <Window 
+      title="About Me" 
+      Width="50"
+      Height="20"
+      x="25"
+      y="25"
+
+      >
         <AboutMe />
-        </Window>
-      <Taskbar />
+      </Window>
+
+
+    
   </div>
+  <!-- Taskbar -->
+  <Taskbar />
 </body>
 
 <style>
