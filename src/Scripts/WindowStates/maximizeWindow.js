@@ -17,9 +17,8 @@ window.maximizeWindow = function(windowId) {
         if(windowElement.dataset.maximized === 'true') {
             windowElement.style.width = windowElement.dataset.prevwidth;
             windowElement.style.height = windowElement.dataset.prevheight;
-            windowElement.style.top = windowElement.dataset.prevleft;
-            windowElement.style.left = windowElement.dataset.prevtop;
-            windowElement.classList.add('draggable');
+            windowElement.style.top = windowElement.dataset.prevtop;
+            windowElement.style.left = windowElement.dataset.prevleft;
             windowElement.dataset.maximized = 'false';
         } else {
             windowElement.dataset.prevwidth = windowElement.style.width;
@@ -32,7 +31,6 @@ window.maximizeWindow = function(windowId) {
             windowElement.style.height = '100%';
             windowElement.style.top = '0';
             windowElement.style.left = '0';
-            windowElement.classList.remove('draggable');
             windowElement.dataset.maximized = 'true';
         }
         

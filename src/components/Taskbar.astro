@@ -8,7 +8,7 @@
   const minutes = now.getMinutes().toString().padStart(2, '0');
   const taskbarClock = document.getElementById('taskbar-clock');
   if (taskbarClock !== null) {
-    taskbarClock.textContent = `${hours}:${minutes} ${ampm}`;
+    taskbarClock.textContent = `${hours}:${minutes} ${ampm}\n${now.toLocaleDateString()}`;
   }
 }
 
@@ -22,105 +22,60 @@ updateClock();
 
 <div class="taskbar">
   <div class="taskbar-icons">
-    <div class="icon"
+    <div class="icon pinned"
     data-id = "Start"
     >
       <img src="/Icons/world.png" alt="Start">
     </div>
-    <div class="icon"
+    <div class="icon pinned active"
     data-id = "User"
     >
       <img src="/Icons/user.png" alt="User">
     </div>
-    <div class="icon"
+    <div class="icon pinned"
     data-id = "App"
     >
       <img src="/Icons/document.png" alt="App">
     </div>
     <!-- Add more icons as needed -->
   </div>
-  <div class="taskbar-clock" id="taskbar-clock">
+
+  <div class="taskbar-right">
+    <div class="taskbar-status-icons">
+      <div class="status-icon">
+        <img src="/Icons/wifi.ico" alt="WiFi">
+      </div>
+      <div class="status-icon">
+        <img src="/Icons/volume.ico" alt="Volume">
+      </div>
+    </div>
+    <div class="taskbar-clock" id="taskbar-clock"></div>
   </div>
 </div>
 
 
 <style>
-  :root {
-  --taskbar-height: 45px; /* Adjust as needed to fit your icons */
-  --taskbar-border-color: rgba(0, 0, 0, 0.7); /* Matching border from title bar */
-  --taskbar-background-color: rgba(69, 128, 196, 0.25); /* Blue tint from the title bar glass effect */
-  --taskbar-glass-stripes: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 70px,
-      transparent 100px
-    ),
-    linear-gradient(225deg, rgba(255, 255, 255, 0.1) 70px, transparent 100px);
-  --taskbar-blur: blur(7px); /* Same blur as in the title bar */
-  --taskbar-icon-size: 40px; /* Icon size to fill the taskbar */
-  --taskbar-icon-spacing: 12px; /* Spacing for icons */
-}
-
+/* Taskbar styles matching the title bar in .window.glass */
 .taskbar {
+  font: var(--font);
+  box-shadow: inset 0 1px 0 #fffd, inset 1px 0 0 #fffd, inset -1px 0 0 #fffd;
+  border: var(--window-border) var(--window-border-color);
+  border-radius: var(--window-border-radius);
+  padding: var(--window-spacing);
+  display: flex;
+  justify-content: space-between; /* Icons on the left, clock on the right */
+  align-items: center;
+  background: var(--window-background-glass-stripes);
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: var(--taskbar-height);
-  background: var(--taskbar-background-color);
-  backdrop-filter: var(--taskbar-blur); /* Exact glass blur from title bar */
-  border-top: 1px solid var(--taskbar-border-color); /* Top border for clean edge */
-  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3); /* Shadow to lift the taskbar */
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Centering icons and clock */
-  padding: 0 8px;
-  z-index: 1000;
-  background-image: var(--taskbar-glass-stripes), var(--taskbar-background-color);
-  background-blend-mode: overlay;
-  background-clip: padding-box;
-  border-radius: 0px; /* Slightly less rounded corners like the title bar */
+  right: 0;
+  height: 35px;
+  z-index: 0;
 }
 
-.taskbar-icons {
-  display: flex;
-  align-items: center;
-}
-
-.taskbar-icons .icon {
-  width: var(--taskbar-icon-size);
-  height: var(--taskbar-icon-size);
-  margin-right: var(--taskbar-icon-spacing);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 2px; /* Minimal rounding for icons */
-  background-color: rgba(255, 255, 255, 0); /* Light glassy background for icons */
-  transition: background-color 0.2s ease;
-}
-
-.taskbar-icons .icon:hover {
-  background-color: rgba(255, 255, 255, 0.4); /* Slight hover effect */
-}
-
-.taskbar-icons .icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.taskbar-clock {
-  color: #fff;
-  font-size: 14px;
-  font-family: "Segoe UI", sans-serif;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  padding-right: 15px;
-  display: flex;
-  align-items: center; /* Centering clock */
-}
-
-/* Exact glass effect from the title bar */
 .taskbar::before {
+  opacity: 0.6;
   content: "";
   position: absolute;
   z-index: -1;
@@ -128,12 +83,10 @@ updateClock();
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(transparent 20%, #ffffff16 80%, transparent 100%),
-    var(--taskbar-background-color);
-  box-shadow: inset 0 0 0 1px #fffd; /* Inset shadow like the title bar */
-  border-radius: 0px; /* Same as the taskbar */
-  opacity: 0.6; /* Glass opacity from title bar */
-  pointer-events: none;
+  background: linear-gradient(transparent 0%, #ffffffb3 700%, transparent 701%),
+    var(--window-background);
+  border: var(--window-border) var(--window-border-color);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.711);
 }
 
 .taskbar::after {
@@ -144,11 +97,168 @@ updateClock();
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 4px;
-  border: none;
-  backdrop-filter: blur(4px); /* Light blur behind the glass */
-  background: var(--taskbar-glass-stripes);
-  opacity: 0.3; /* Soft stripe effect */
+  background: var(--window-background-glass-stripes);
+  backdrop-filter: blur(3px);
+}
+
+.taskbar-icons {
+  display: flex;
+  align-items: center;
+  margin-left: 0px;
+}
+
+.taskbar-icons .icon {
+  position: relative;
+  width: 60px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.taskbar-icons .icon img {
+  object-fit: contain;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+}
+
+.taskbar-icons .icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Hover icon styles */
+.taskbar-icons .icon:hover::before,
+.taskbar-icons .icon:hover::after {
+  background: radial-gradient(circle at bottom, #ffffff , transparent 100%);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 1), 2px 0 5px rgba(0, 0, 0, 1);
+  opacity: .8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Active icon styles */
+.taskbar-icons .icon.active::before,
+.taskbar-icons .icon.active::after {
+  border-radius: var(--border-radius);
+  box-shadow: var(--button-shadow);
+  background: var(--control-background);
+  backdrop-filter: blur(3px);
+  opacity: .8;
+  transition: opacity 0.3s;
+}
+
+.taskbar-icons .icon.active:hover::before,
+.taskbar-icons .icon.active:hover::after {
+  border-radius: var(--border-radius);
+  box-shadow: var(--button-shadow);
+  background: var(--control-background);
+  opacity: 1;
+  filter: brightness(1.1);
+  transition: opacity brightness 0.3s ease-in-out;
+}
+
+.taskbar-icons .icon:active::before,
+.taskbar-icons .icon:active::after,
+.taskbar-icons .icon.active:active::before,
+.taskbar-icons .icon.active:active::after
+
+{
+  content: "";
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Taskbar Right Section */
+.taskbar-right {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.taskbar-status-icons {
+  display: flex;
+  align-items: center;
+}
+
+.taskbar-status-icons .status-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taskbar-status-icons .status-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.taskbar-clock {
+  color: #fff;
+  font-size: 13px;
+  font-family: "Segoe UI", sans-serif;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 1);
+  display: flex;
+  align-items: center;
+  white-space: pre-line;
+  text-align: center;
+}
+
+/* Disable text selection and dragging */
+.taskbar, .taskbar * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+}
+
+
+.taskbar-icon-add-animation {
+  animation: taskbarIconAdd 0.3s forwards;
+}
+
+@keyframes taskbarIconAdd {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.taskbar-icon-remove-animation {
+  animation: taskbarIconRemove 0.3s forwards;
+}
+
+@keyframes taskbarIconRemove {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 </style>

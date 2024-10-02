@@ -27,6 +27,7 @@ import AboutMe from '../Content/AboutMe.astro';
       title="User" 
       icon="Icons/user.png" 
       windowId="User"
+      y="0"
     />
 
 
@@ -36,8 +37,9 @@ import AboutMe from '../Content/AboutMe.astro';
     <!-- Windows -->
       <Window 
       title="User"
-      x="5"
-      y="5"
+      x="10"
+      y="10"
+      icon="Icons/user.png"
       > 
         <User />
       </Window>
@@ -46,8 +48,8 @@ import AboutMe from '../Content/AboutMe.astro';
       title="About Me" 
       Width="50"
       Height="20"
-      x="25"
-      y="25"
+      x="30"
+      y="30"
 
       >
         <AboutMe />
@@ -61,13 +63,12 @@ import AboutMe from '../Content/AboutMe.astro';
 </body>
 
 <style>
-  html{
+html{
     min-height: 100%;
     background-image: url('WallPaper.jpg');
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
-  }
+}
 </style>

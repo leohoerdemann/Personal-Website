@@ -5,8 +5,10 @@ const { icon, title, x = 0, y = 0, windowId } = Astro.props;
   class="desktop-icon"
   data-id = {windowId}
   style={`left: ${x}%; top: ${y}%;`} 
+   tabindex="0"
 >
-  <img src={icon} alt={`${title} icon`} />
+
+  <img src={icon} alt={`${title} icon`}/>
   <div class="icon-title">{title}</div>
 </div>
 
@@ -18,21 +20,60 @@ const { icon, title, x = 0, y = 0, windowId } = Astro.props;
     align-items: center;
     cursor: pointer;
     margin: 5px;
+    height: 85px;
+    width: 85px;
   }
   .desktop-icon img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
+    z-index: -1;
   }
   .icon-title {
     color: #fff;
-    font-size: 14px;
+    font-size: 15px;
     font-family: "Segoe UI", sans-serif;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    white-space: pre-line;
     text-align: center;
     margin-top: 5px;
   }
 
-  .desktop-icon:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+  .desktop-icon:hover::before,
+  .desktop-icon:hover::after {
+    content: "";
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--button-shadow);
+    background: var(--control-background);
+    opacity: .5;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(.1px);
+}
+
+.desktop-icon:focus::before {
+    content: "";
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--button-shadow);
+    background: var(--button-gradient-active);
+    opacity: .5;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(.1px);
+}
+
+
+
+
 </style>

@@ -13,8 +13,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.body.style.webkitUserSelect = 'none';
             document.body.style.msUserSelect = 'none';
 
-            let offsetX = e.clientX - parseInt(window.getComputedStyle(this.parentElement).left);
-            let offsetY = e.clientY - parseInt(window.getComputedStyle(this.parentElement).top);
+            const windowElement = this.parentElement;
+
+            if (windowElement.dataset.maximized === 'true') {
+                windowElement.dataset.maximized = 'false';
+                windowElement.style.width = windowElement.dataset.prevwidth;
+                windowElement.style.height = windowElement.dataset.prevheight;
+            }
+
+            let offsetX = e.clientX - parseInt(window.getComputedStyle(windowElement).left);
+            let offsetY = e.clientY - parseInt(window.getComputedStyle(windowElement).top);
             function mouseMoveHandler(e) {
                 draggable.style.top = (e.clientY - offsetY) + 'px';
                 draggable.style.left = (e.clientX - offsetX) + 'px';

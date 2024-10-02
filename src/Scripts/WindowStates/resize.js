@@ -1,5 +1,17 @@
-// resize.js
 document.addEventListener('DOMContentLoaded', () => {
+
+    const MIN_Height= 50;
+
+    function minHeight(size){
+        return size < MIN_Height ? MIN_Height : size;
+    }
+
+    const MIN_Width= 200;
+
+    function minWidth(size){
+        return size < MIN_Width ? MIN_Width : size;
+    }
+
     const resizableElements = document.querySelectorAll('.resize-handle');
   
     resizableElements.forEach(handle => {
@@ -11,11 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.webkitUserSelect = 'none';
         document.body.style.msUserSelect = 'none';
 
-        if (windowElement.dataset.maximized === 'true') {
-            windowElement.dataset.maximized = 'false';
-            windowElement.classList.add('draggable');
-        }
-
         let initialX = e.clientX;
         let initialY = e.clientY;
         let initialWidth = parseInt(window.getComputedStyle(windowElement).width, 10);
@@ -23,34 +30,46 @@ document.addEventListener('DOMContentLoaded', () => {
   
         function resize(e) {
           if (handle.classList.contains('right')) {
-            windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
+            windowElement.style.width = minWidth(initialWidth + (e.clientX - initialX)) + 'px';
           } else if (handle.classList.contains('left')) {
-            windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
-            windowElement.style.left = e.clientX + 'px';
+            windowElement.style.width = minWidth(initialWidth - (e.clientX - initialX)) + 'px';
+            if (parseInt(windowElement.style.width) > MIN_Width) {
+                windowElement.style.left = e.clientX + 'px';
+            }
           } else if (handle.classList.contains('bottom')) {
-            windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
+            windowElement.style.height = minHeight(initialHeight + (e.clientY - initialY)) + 'px';
           } else if (handle.classList.contains('top')) {
-            windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
-            windowElement.style.top = e.clientY + 'px';
+            windowElement.style.height = minHeight(initialHeight - (e.clientY - initialY)) + 'px';
+            if (parseInt(windowElement.style.height) > MIN_Height) {
+              windowElement.style.top = e.clientY + 'px';
+            }
           }
 
            // Handle diagonal resizing
             if (handle.classList.contains('bottom-right')) {
-                windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
-                windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
+                windowElement.style.width = minWidth(initialWidth + (e.clientX - initialX)) + 'px';
+                windowElement.style.height = minHeight(initialHeight + (e.clientY - initialY)) + 'px';
             } else if (handle.classList.contains('bottom-left')) {
-                windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
-                windowElement.style.height = initialHeight + (e.clientY - initialY) + 'px';
-                windowElement.style.left = e.clientX + 'px';
+                windowElement.style.width = minWidth(initialWidth - (e.clientX - initialX)) + 'px';
+                windowElement.style.height = minHeight(initialHeight + (e.clientY - initialY)) + 'px';
+                if (parseInt(windowElement.style.width) > MIN_Width) {
+                    windowElement.style.left = e.clientX + 'px';
+                }
             } else if (handle.classList.contains('top-right')) {
-                windowElement.style.width = initialWidth + (e.clientX - initialX) + 'px';
-                windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
-                windowElement.style.top = e.clientY + 'px';
+                windowElement.style.width = minWidth(initialWidth + (e.clientX - initialX)) + 'px';
+                windowElement.style.height = minHeight(initialHeight - (e.clientY - initialY)) + 'px';
+                if (parseInt(windowElement.style.height) > MIN_Height) {
+                  windowElement.style.top = e.clientY + 'px';
+                }
             } else if (handle.classList.contains('top-left')) {
-                windowElement.style.width = initialWidth - (e.clientX - initialX) + 'px';
-                windowElement.style.height = initialHeight - (e.clientY - initialY) + 'px';
-                windowElement.style.left = e.clientX + 'px';
-                windowElement.style.top = e.clientY + 'px';
+                windowElement.style.width = minWidth(initialWidth - (e.clientX - initialX)) + 'px';
+                windowElement.style.height = minHeight(initialHeight - (e.clientY - initialY)) + 'px';
+                if (parseInt(windowElement.style.width) > MIN_Width) {
+                    windowElement.style.left = e.clientX + 'px';
+                }
+                if (parseInt(windowElement.style.height) > MIN_Height) {
+                  windowElement.style.top = e.clientY + 'px';
+                }
             }
         }
   
