@@ -1,0 +1,164 @@
+---
+const finishedProjects = [
+  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket' },
+  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)'},
+  { id: "leobot", name: 'ChatGPT Powered Chat Bot' },
+  { id: "portfolio", name: 'Portfolio Website (This!)' },
+  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)' },
+  { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence' },
+  { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading' },
+  { id: "cse471", name: 'Video and Audio Processing App' },
+  { id: "cse476", name: 'Location Based Android App with Webserver' },
+  { id: "shadows", name: 'Unity Based VR Game' },
+];
+
+const inProgressProjects = [
+  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)' },
+  { id: "projectMercury", name: 'Unreal Engine 5 First Person Shooter (Project Mercury)' },
+  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deitycell)' },
+  { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Projects</title>
+    <link rel="stylesheet" href="/path/to/7.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e5e5e5;
+        color: #000;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px solid #c8c8c8;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+      }
+
+      .list-view {
+        width: 100%;
+        overflow: auto;
+      }
+
+      .list-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        border-bottom: 1px solid #e5e5e5;
+        cursor: pointer;
+      }
+
+      .list-item:last-child {
+        border-bottom: none;
+      }
+
+      .list-item:hover {
+        background-color: #cfe8fc;
+      }
+
+      .list-item-icon {
+        margin-right: 0.5rem;
+      }
+
+      .list-item-text {
+        flex: 1;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 1rem;
+          padding: 0.5rem;
+        }
+
+        h1 {
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container window">
+      <div class="title-bar">
+        <div class="title-bar-text">Projects</div>
+      </div>
+      <div class="window-body">
+        <!-- Finished Projects Section -->
+        <div class="section">
+          <h1>Past Projects</h1>
+          <div class="list-view">
+            {finishedProjects.map((project) => (
+              <div
+                class="list-item"
+                onclick= "handleProjectClick({project})"
+              >
+                <img
+                  src="/path/to/icon.png"
+                  alt="Project Icon"
+                  class="list-item-icon"
+                  width="32"
+                  height="32"
+                />
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Projects in Progress Section -->
+        <div class="section">
+          <h1>Projects Still in Progress</h1>
+          <div class="list-view">
+            {inProgressProjects.map((project) => (
+              <div
+                class="list-item"
+                onclick= "handleProjectClick({project})"
+              >
+                <img
+                  src="/path/to/icon.png"
+                  alt="Project Icon"
+                  class="list-item-icon"
+                  width="32"
+                  height="32"
+                />
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      function handleProjectClick(project) {
+        const projectDiv = document.querySelector('div#Projects[data-number="2"]');
+        const projectDivs = projectDiv.querySelectorAll('div');
+        projectDivs.forEach(div => {
+          if (div.classList.contains(project.id)) {
+            div.classList.remove('hidden');
+          } else {
+            div.classList.add('hidden');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

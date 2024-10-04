@@ -7,6 +7,9 @@ import User from '../Content/User.astro';
 // the content of the pages
 import AboutMe from '../Content/AboutMe.astro';
 import Resume from '../Content/Resume.astro';
+
+import Selector from '../Content/Projects/Selector.astro';
+import ProjectShell from '../Content/Projects/ProjectShell.astro';
 ---
 
 
@@ -57,7 +60,7 @@ import Resume from '../Content/Resume.astro';
     />
 
     <DesktopIcon 
-      title="Pong" 
+      title="Breakout" 
       icon="Icons/games.png" 
       windowId="Pong"
       y="40"
@@ -106,6 +109,31 @@ import Resume from '../Content/Resume.astro';
         <Resume />
       </Window>
 
+      <Window
+      title="Projects"
+      Width="40"
+      Height="60"
+      x="70"
+      y="30"
+      icon="Icons/file.png"
+      hidden="hidden"
+      >
+        <Selector />
+      </Window>
+
+
+      <Window
+      title="Projects"
+      number="2"
+      Width="40"
+      Height="60"
+      x="70"
+      y="30"
+      icon="Icons/file.png"
+      hidden="hidden"
+      >
+        <ProjectShell />
+    </Window>
 
     
   </div>

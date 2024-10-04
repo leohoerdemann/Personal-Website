@@ -1,0 +1,187 @@
+---
+const project = {
+  title: 'Project Title',
+  link: 'https://example.com',
+  collaborator: 'Collaborator Name',
+  Team: 'Team Name',
+  images: ['/path/to/image1.jpg', '/path/to/image2.jpg'],
+  videoUrl: 'https://www.youtube.com/embed/VIDEO_ID', // Replace VIDEO_ID with your video's ID
+  description: `
+    <p>Your project description goes here. Include detailed paragraphs explaining the project.</p>
+    <p>You can add multiple paragraphs for more information.</p>
+  `,
+  bulletPoints: [
+    'First key point about the project.',
+    'Second key point about the project.',
+    'Another important aspect of the project.',
+  ],
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{project.title}</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Verdana', sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header a {
+        color: #0066cc;
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+
+      .header a:hover {
+        text-decoration: underline;
+      }
+
+      .header p {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .left-column {
+        flex: 1 1 40%;
+        padding-right: 1rem;
+      }
+
+      .right-column {
+        flex: 1 1 60%;
+        padding-left: 1rem;
+      }
+
+      .images {
+        margin-bottom: 1rem;
+      }
+
+      .images img {
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .video {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .description p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .bullet-points ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+      }
+
+      .bullet-points li {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          flex-direction: column;
+        }
+
+        .left-column,
+        .right-column {
+          padding: 0;
+        }
+
+        .left-column {
+          margin-bottom: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>{project.title}</h1>
+        <a href="{project.link}" target="_blank" rel="noopener">View Project</a>
+        <p>Collaborator: {project.collaborator}</p>
+        <p>Team: {project.Team}</p>
+      </div>
+      <div class="content">
+        <div class="left-column">
+          <!-- Images -->
+          {project.images.map((image) => (
+            <div class="images">
+              <img src={image} alt="Project Image" />
+            </div>
+          ))}
+
+          <!-- YouTube Video -->
+          {project.videoUrl && (
+            <div class="video">
+              <iframe
+                src={project.videoUrl}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          )}
+        </div>
+        <div class="right-column">
+          <div class="description" set:html={project.description}></div>
+          <div class="bullet-points">
+            <h2>Key Points</h2>
+            <ul>
+              {project.bulletPoints.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
