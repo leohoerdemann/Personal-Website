@@ -3,7 +3,10 @@ import DesktopIcon from '../components/DesktopIcon.astro';
 import Window from '../components/Window.astro';
 import Taskbar from '../components/Taskbar.astro';
 import User from '../Content/User.astro';
+
+// the content of the pages
 import AboutMe from '../Content/AboutMe.astro';
+import Resume from '../Content/Resume.astro';
 ---
 
 
@@ -23,6 +26,7 @@ import AboutMe from '../Content/AboutMe.astro';
 <body>
   <div class="desktop">
     <!-- Desktop Icons -->
+     <div class="desktop-icons">
     <DesktopIcon 
       title="User" 
       icon="Icons/user.png" 
@@ -30,8 +34,42 @@ import AboutMe from '../Content/AboutMe.astro';
       y="0"
     />
 
+    <DesktopIcon 
+      title="Projects" 
+      icon="Icons/file.png" 
+      windowId="Projects"
+      y="10"
+    />
 
+    <DesktopIcon 
+      title="Transcript" 
+      icon="Icons/browse.png" 
+      windowId="Transcript"
+      y="20"
+      link = "pdfs/Leo Hoerdemann Transcript.pdf"
+    />
 
+    <DesktopIcon 
+      title="Resume" 
+      icon="Icons/attachment.png" 
+      windowId="Resume"
+      y="30"
+    />
+
+    <DesktopIcon 
+      title="Pong" 
+      icon="Icons/games.png" 
+      windowId="Pong"
+      y="40"
+    />
+
+    <DesktopIcon 
+      title="Paint" 
+      icon="Icons/pen.png" 
+      windowId="Paint"
+      y="50"
+    />
+    </div>
 
 
     <!-- Windows -->
@@ -45,14 +83,27 @@ import AboutMe from '../Content/AboutMe.astro';
       </Window>
 
       <Window 
-      title="About Me" 
+      title="User" 
       Width="50"
       Height="20"
       x="30"
       y="30"
-
+      icon="Icons/user.png"
+      number="2"
       >
         <AboutMe />
+      </Window>
+
+      <Window
+      title="Resume"
+      Width="40"
+      Height="60"
+      x="50"
+      y="30"
+      icon="Icons/attachment.png"
+      hidden="hidden"
+      >
+        <Resume />
       </Window>
 
 
@@ -65,7 +116,7 @@ import AboutMe from '../Content/AboutMe.astro';
 <style>
 html{
     min-height: 100%;
-    background-image: url('WallPaper.jpg');
+    background-image: url('IMG_4846.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

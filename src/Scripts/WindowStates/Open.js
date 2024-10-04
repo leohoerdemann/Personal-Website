@@ -3,7 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktopIcons = document.querySelectorAll('.desktop-icon');
   desktopIcons.forEach(icon => {
     icon.addEventListener('dblclick', () => {
-      openWindow(icon.dataset.id);
+      if (icon.classList.contains('override')) {
+        window.open(icon.dataset.link, '_blank');
+      } else {
+        openWindow(icon.dataset.id);
+      }
+      icon.blur();
     });
   });
 
@@ -11,57 +16,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskbarIcons = document.querySelectorAll('.taskbar .icon');
   taskbarIcons.forEach(icon => {
     icon.addEventListener('click', () => {
+      if (icon.classList.contains('override')) {
+        window.open(icon.dataset.link, '_blank');
+      } else {
       openWindow(icon.dataset.id);
       icon.classList.add('window-open');
+      }
     });
   });
 });
 
 function openWindow(windowId) {
-  const windowElement = document.getElementById(windowId);
+  const windowElements = document.querySelectorAll(`#${windowId}`);
 
-  if (!windowElement) {
-    console.error(`No window found with ID: ${windowId}`);
-    return;
-  }
-
-  // **Clear any text selection**
-  if (window.getSelection) {
-    window.getSelection().removeAllRanges();
-  } else if (document.selection) {
-    // For older browsers (IE)
-    document.selection.empty();
-  }
-
-  var hidden = windowElement.classList.contains('hidden');
-  var minimized = windowElement.classList.contains('minimized');
-  if (hidden || minimized) {
-    // Open the window with the Windows 7-style animation
-    windowElement.classList.remove('hidden', 'minimized', 'close-animation', 'minimize-animation');
-
-    if(hidden)
-    {
-      windowElement.classList.add('open-animation');
+  windowElements.forEach(windowElement => {
+    if (!windowElement) {
+      console.error(`No window found with ID: ${windowId}`);
+      return;
     }
-    else
-    {
-      windowElement.classList.add('unMini-animation');
+  
+    // **Clear any text selection**
+    if (window.getSelection) {
+      window.getSelection().removeAllRanges();
+    } else if (document.selection) {
+      // For older browsers (IE)
+      document.selection.empty();
     }
-    
+  
+    var hidden = windowElement.classList.contains('hidden');
+    var minimized = windowElement.classList.contains('minimized');
+    if (hidden || minimized) {
+      // Open the window with the Windows 7-style animation
+      windowElement.classList.remove('hidden', 'minimized', 'close-animation', 'minimize-animation');
+  
+      if(hidden)
+      {
+        windowElement.classList.add('open-animation');
+      }
+      else
+      {
+        windowElement.classList.add('unMini-animation');
+      }
+      
+  
+      // Add 'active' class to the corresponding taskbar icon
+      let taskbarIcon = document.querySelector(`.taskbar .icon[data-id="${windowId}"]`);
+      if (!taskbarIcon) {
+        // Icon is not on the taskbar, so add it with an animation
+        taskbarIcon = createTaskbarIcon(windowId);
+      }
+      taskbarIcon.classList.add('active');
+    }
+      const windows = document.querySelectorAll('.window');
+      windows.forEach(win => win.classList.remove('active'));
+      windowElement.classList.add('active');
 
-    // Add 'active' class to the corresponding taskbar icon
-    let taskbarIcon = document.querySelector(`.taskbar .icon[data-id="${windowId}"]`);
-    if (!taskbarIcon) {
-      // Icon is not on the taskbar, so add it with an animation
-      taskbarIcon = createTaskbarIcon(windowId);
-    }
-    taskbarIcon.classList.add('active');
-  } else {
-    // Window is already open, bring it to front
-    const windows = document.querySelectorAll('.window');
-    windows.forEach(win => win.classList.remove('active'));
-    windowElement.classList.add('active');
-  }
+    // Bring the window to the top
+    windowElement.style.zIndex = Math.max(...Array.from(windowElements, w => parseInt(w.style.zIndex) || 0)) + 1;
+  }); 
 }
 
 function createTaskbarIcon(windowId) {

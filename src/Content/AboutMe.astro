@@ -1,33 +1,94 @@
 ---
-title: "About Me"
 ---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>About Me</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Verdana', sans-serif;
+        background: #f5f5f5;
+        color: #333;
+      }
 
-<div class = about>
-
-<img src="profile.PNG" alt="Profile Picture" class="profile-picture" />
-
-<p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt aliquet, mauris nunc lacinia mauris, id ultrices nunc nunc id lacus. Nulla facilisi. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.
-        Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt aliquet, mauris nunc lacinia mauris, id ultrices nunc nunc id lacus. Nulla facilisi. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.
-        Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt aliquet, mauris nunc lacinia mauris, id ultrices nunc nunc id lacus. Nulla facilisi. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.
-        Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc. Sed auctor, nunc id lacinia tincidunt, nisl nunc aliquam nunc, id lacinia neque nunc in nunc.
-
-</p>
-</div>
-
-<style>
-    .profile-picture {
-        width: 10%;
-        margin: 20px;
-    }
-
-
-    .about {
+      .container {
         display: flex;
-        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
         align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-</style>
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .photo {
+        flex: .2 1 200px;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .photo img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .text {
+        flex: 2 1 500px;
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      p {
+        line-height: 1.6;
+        font-size: 1.1rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .text {
+          padding: 0;
+        }
+
+        .photo {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="photo">
+        <img src="profile.PNG" alt="Leo Hoerdemann" />
+      </div>
+      <div class="text">
+        <h1>About Me</h1>
+        <p>
+          <!-- Replace this placeholder text with your actual content -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+          lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod
+          malesuada. Nullam ac erat ante. Integer ultricies mi eu aliquet
+          cursus. Curabitur vehicula, nisl at convallis tincidunt, sapien risus
+          cursus urna, at commodo purus nisl et metus. Praesent efficitur, urna
+          sit amet cursus placerat, sapien justo aliquam nisl, vitae euismod
+          magna quam ac nisi.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

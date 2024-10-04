@@ -3,15 +3,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     windows.forEach(Window => {
       const maxButton = Window.querySelector('.maximize-button');
       maxButton.addEventListener('click', () => {
-        window.maximizeWindow(Window.id);
+        window.maximizeWindow(Window.id, Window.dataset.number);
       });
         
     });
 });
   
 
-window.maximizeWindow = function(windowId) {
-    const windowElement = document.getElementById(windowId);
+window.maximizeWindow = function(windowId, windowNumber) {
+  const windowElement = document.querySelector(`#${windowId}[data-number="${windowNumber}"]`);
   
     if (windowElement) {
         if(windowElement.dataset.maximized === 'true') {

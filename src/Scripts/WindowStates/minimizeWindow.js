@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   windows.forEach(win => {
     const minimizeButton = win.querySelector('.minimize-button');
     minimizeButton.addEventListener('click', () => {
-      minimizeWindow(win.id);
+      minimizeWindow(win.id, win.dataset.number);
     });
   });
 });
 
-function minimizeWindow(windowId) {
-  const windowElement = document.getElementById(windowId);
+function minimizeWindow(windowId, windowNumber) {
+  const windowElement = document.querySelector(`#${windowId}[data-number="${windowNumber}"]`);
 
   if (!windowElement) {
     console.error(`No window found with ID: ${windowId}`);
@@ -18,6 +18,7 @@ function minimizeWindow(windowId) {
 
   // Minimize the window with the minimize animation
   windowElement.classList.remove('open-animation');
+  windowElement.classList.remove('unMini-animation');
   windowElement.classList.add('minimize-animation');
 
   // Delay the hiding to let the animation finish

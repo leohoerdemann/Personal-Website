@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function closeWindow(windowId) {
-  const windowElement = document.getElementById(windowId);
+  const windowElements = document.querySelectorAll(`#${windowId}`);
+
+  windowElements.forEach(windowElement => {
 
   if (!windowElement) {
     console.error(`No window found with ID: ${windowId}`);
@@ -42,6 +44,7 @@ function closeWindow(windowId) {
       }
     }
   }, 150); // Match the duration of the close animation
+}); 
 }
 
 function isIconPinned(windowId) {

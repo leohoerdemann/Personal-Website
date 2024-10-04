@@ -22,8 +22,9 @@ updateClock();
 
 <div class="taskbar">
   <div class="taskbar-icons">
-    <div class="icon pinned"
+    <div class="icon pinned override"
     data-id = "Start"
+    data-link = " https://www.portfolio.leohoerdemann.xyz"
     >
       <img src="/Icons/world.png" alt="Start">
     </div>
@@ -33,9 +34,9 @@ updateClock();
       <img src="/Icons/user.png" alt="User">
     </div>
     <div class="icon pinned"
-    data-id = "App"
+    data-id = "Resume"
     >
-      <img src="/Icons/document.png" alt="App">
+      <img src="/Icons/attachment.png" alt="Resume">
     </div>
     <!-- Add more icons as needed -->
   </div>
@@ -71,7 +72,7 @@ updateClock();
   left: 0;
   right: 0;
   height: 35px;
-  z-index: 0;
+  z-index: 100000;
 }
 
 .taskbar::before {
@@ -117,6 +118,7 @@ updateClock();
   cursor: pointer;
   overflow: hidden;
   z-index: 0;
+  margin-right: 1.5px;
 }
 
 .taskbar-icons .icon img {

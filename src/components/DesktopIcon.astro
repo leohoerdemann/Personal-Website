@@ -1,11 +1,12 @@
 ---
-const { icon, title, x = 0, y = 0, windowId } = Astro.props;
+const { icon, title, x = 0, y = 0, link="", windowId } = Astro.props;
 ---
 <div 
-  class="desktop-icon"
+  class={`desktop-icon ${link === "" ? "" : "override"}`}
   data-id = {windowId}
+  data-link = {link}
   style={`left: ${x}%; top: ${y}%;`} 
-   tabindex="0"
+  tabindex="0"
 >
 
   <img src={icon} alt={`${title} icon`}/>
@@ -13,32 +14,35 @@ const { icon, title, x = 0, y = 0, windowId } = Astro.props;
 </div>
 
 <style>
-  .desktop-icon {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    margin: 5px;
-    height: 85px;
-    width: 85px;
-  }
-  .desktop-icon img {
-    width: 60px;
-    height: 60px;
-    z-index: -1;
-  }
-  .icon-title {
-    color: #fff;
-    font-size: 15px;
-    font-family: "Segoe UI", sans-serif;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 1);
-    display: flex;
-    align-items: center;
-    white-space: pre-line;
-    text-align: center;
-    margin-top: 5px;
-  }
+.desktop-icon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: clamp(0.25vh, 5px, 0.37vh); 
+  height: clamp(7vh, 85px, 9.5vh);        
+  width: clamp(7vh, 85px, 9.5vh);          
+}
+
+.desktop-icon img {
+  width: clamp(4.63vh, 63px, 7vh);      
+  height: clamp(4.63vh, 63px, 7vh);      
+  z-index: -1;
+}
+
+.icon-title {
+  color: #fff;
+  font-size: clamp(1.2vh, 15px, 1.5vh);    /* Font size scaled between ~14px and ~20px */
+  font-family: "Segoe UI", sans-serif;
+  text-shadow: 0 0 clamp(0.5vh, 5px, 0.7vh) rgba(0, 0, 0, 1);  /* Text shadow scales smoothly */
+  display: flex;
+  align-items: center;
+  white-space: pre-line;
+  text-align: center;
+  margin-top: clamp(0.34vh, 5px, 0.44vh);  /* Top margin for spacing */
+}
+
 
   .desktop-icon:hover::before,
   .desktop-icon:hover::after {
