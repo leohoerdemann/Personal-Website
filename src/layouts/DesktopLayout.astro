@@ -10,6 +10,10 @@ import Resume from '../Content/Resume.astro';
 
 import Selector from '../Content/Projects/Selector.astro';
 import ProjectShell from '../Content/Projects/ProjectShell.astro';
+
+// import the games
+import Breakout from '../Content/Breakout.astro';
+import Paint from '../Content/Paint.astro';
 ---
 
 
@@ -134,6 +138,30 @@ import ProjectShell from '../Content/Projects/ProjectShell.astro';
       >
         <ProjectShell />
     </Window>
+
+      <Window
+      title="Breakout"
+      Width="40"
+      Height="60"
+      x="110"
+      y="30"
+      icon="Icons/games.png"
+      hidden="hidden"
+      >
+       <Breakout /> 
+      </Window>
+
+      <Window
+      title="Paint"
+      Width="40"
+      Height="60"
+      x="130"
+      y="30"
+      icon="Icons/pen.png"
+      hidden="hidden"
+      >
+        <Paint />
+      </Window>
 
     
   </div>
