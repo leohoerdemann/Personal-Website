@@ -23,9 +23,6 @@ const inProgressProjects = [
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Projects</title>
-    <link rel="stylesheet" href="/path/to/7.css" />
     <style>
       body {
         margin: 0;
@@ -96,11 +93,7 @@ const inProgressProjects = [
     </style>
   </head>
   <body>
-    <div class="container window">
-      <div class="title-bar">
-        <div class="title-bar-text">Projects</div>
-      </div>
-      <div class="window-body">
+    <div class="container">
         <!-- Finished Projects Section -->
         <div class="section">
           <h1>Past Projects</h1>
@@ -111,7 +104,7 @@ const inProgressProjects = [
                 onclick= "handleProjectClick({project})"
               >
                 <img
-                  src="/path/to/icon.png"
+                  src="Icons/document.png"
                   alt="Project Icon"
                   class="list-item-icon"
                   width="32"
@@ -133,7 +126,7 @@ const inProgressProjects = [
                 onclick= "handleProjectClick({project})"
               >
                 <img
-                  src="/path/to/icon.png"
+                  src="Icons/document.png"
                   alt="Project Icon"
                   class="list-item-icon"
                   width="32"
@@ -144,7 +137,6 @@ const inProgressProjects = [
             ))}
           </div>
         </div>
-      </div>
     </div>
 
     <script is:inline>

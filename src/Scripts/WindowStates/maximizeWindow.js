@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const windows = document.querySelectorAll('.window');
     windows.forEach(Window => {
       const maxButton = Window.querySelector('.maximize-button');
-      maxButton.addEventListener('click', () => {
+      maxButton?.addEventListener('click', () => {
         window.maximizeWindow(Window.id, Window.dataset.number);
       });
         

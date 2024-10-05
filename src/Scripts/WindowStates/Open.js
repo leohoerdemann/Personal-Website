@@ -78,14 +78,14 @@ function openWindow(windowId) {
 
 function createTaskbarIcon(windowId) {
   // Create a new taskbar icon
-  const taskbarIconsContainer = document.querySelector('.taskbar .taskbar-icons');
+  const taskbarIconsContainer = document.querySelector('.taskbar').querySelector('.taskbar-icons');
   const newIcon = document.createElement('div');
   newIcon.classList.add('icon');
   newIcon.dataset.id = windowId;
 
   // Set the icon image (you may need to map windowId to icon src)
   const img = document.createElement('img');
-  img.src = getIconSrc(windowId); // Implement this function based on your logic
+  img.src = getIconSrc(windowId);
   img.alt = windowId;
 
   newIcon.appendChild(img);
@@ -109,9 +109,12 @@ function getIconSrc(windowId) {
       return '/Icons/world.png';
     case 'User':
       return '/Icons/user.png';
-    case 'App':
-      return '/Icons/document.png';
-    // Add more cases as needed
+    case 'Projects':
+      return '/Icons/file.png';
+    case 'Breakout':
+      return '/Icons/games.png';
+    case 'Paint':
+      return '/Icons/pen.png';
     default:
       return '/Icons/default.png';
   }

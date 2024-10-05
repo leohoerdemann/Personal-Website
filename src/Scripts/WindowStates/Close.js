@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const windows = document.querySelectorAll('.window');
   windows.forEach(win => {
     const closeButton = win.querySelector('.close-button');
-    closeButton.addEventListener('click', () => {
+    closeButton?.addEventListener('click', () => {
       closeWindow(win.id);
     });
   });

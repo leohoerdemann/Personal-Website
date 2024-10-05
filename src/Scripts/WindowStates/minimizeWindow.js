@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const windows = document.querySelectorAll('.window');
   windows.forEach(win => {
     const minimizeButton = win.querySelector('.minimize-button');
-    minimizeButton.addEventListener('click', () => {
+    minimizeButton?.addEventListener('click', () => {
       minimizeWindow(win.id, win.dataset.number);
     });
   });
