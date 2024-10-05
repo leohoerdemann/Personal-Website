@@ -72,7 +72,8 @@ function openWindow(windowId) {
       windowElement.classList.add('active');
 
     // Bring the window to the top
-    windowElement.style.zIndex = Math.max(...Array.from(windowElements, w => parseInt(w.style.zIndex) || 0)) + 1;
+    const totalWindows = document.querySelectorAll('.window');
+    windowElement.style.zIndex = Math.max(...Array.from(totalWindows, w => parseInt(w.style.zIndex) || 0)) + 1;
   }); 
 }
 

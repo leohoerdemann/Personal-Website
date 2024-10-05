@@ -15,7 +15,7 @@ const finishedProjects = [
 const inProgressProjects = [
   { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)' },
   { id: "projectMercury", name: 'Unreal Engine 5 First Person Shooter (Project Mercury)' },
-  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deitycell)' },
+  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)' },
   { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method' },
 ];
 ---
@@ -101,7 +101,7 @@ const inProgressProjects = [
             {finishedProjects.map((project) => (
               <div
                 class="list-item"
-                onclick= "handleProjectClick({project})"
+                data-project= {project.id}
               >
                 <img
                   src="Icons/document.png"
@@ -123,7 +123,7 @@ const inProgressProjects = [
             {inProgressProjects.map((project) => (
               <div
                 class="list-item"
-                onclick= "handleProjectClick({project})"
+                data-project= {project.id}
               >
                 <img
                   src="Icons/document.png"
@@ -140,11 +140,19 @@ const inProgressProjects = [
     </div>
 
     <script is:inline>
+      document.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', () => {
+            handleProjectClick(item.dataset.project);
+        });
+      });
+
+
       function handleProjectClick(project) {
-        const projectDiv = document.querySelector('div#Projects[data-number="2"]');
+        const projectDiv = document.querySelector('#Projects[data-number="2"]').querySelector('.window-body');
         const projectDivs = projectDiv.querySelectorAll('div');
         projectDivs.forEach(div => {
-          if (div.classList.contains(project.id)) {
+          if (div.classList.contains(project)) {
+            
             div.classList.remove('hidden');
           } else {
             div.classList.add('hidden');
