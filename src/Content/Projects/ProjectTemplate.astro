@@ -1,40 +1,30 @@
 ---
-const project = {
-  title: 'Project Title',
-  link: 'https://example.com',
-  collaborator: 'Collaborator Name',
-  Team: 'Team Name',
-  images: [],
-  videoUrl: '', // https://www.youtube.com/embed/VIDEO_ID
-  description: `
+const{
+  title = 'Project Title',
+  link = 'https://example.com',
+  collaborator,
+  Team = 'Team Name',
+  images = [],
+  videoUrl = '', // https://www.youtube.com/embed/VIDEO_ID
+  description = `
     <p>Your project description goes here. Include detailed paragraphs explaining the project.</p>
     <p>You can add multiple paragraphs for more information.</p>
   `,
-  bulletPoints: [
+  bulletPoints = [
     'First key point about the project.',
     'Second key point about the project.',
     'Another important aspect of the project.',
   ],
-};
+
+  inProgress = false,
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>{project.title}</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Verdana', sans-serif;
-        background: #f5f5f5;
-        color: #333;
-      }
 
       .container {
         max-width: 1200px;
-        margin: 50px auto;
+        margin: 0 auto;
         padding: 2rem;
         background: #fff;
         border-radius: 10px;
@@ -44,6 +34,7 @@ const project = {
       .header {
         text-align: center;
         margin-bottom: 2rem;
+        white-space: pre-line;
       }
 
       .header h1 {
@@ -68,7 +59,6 @@ const project = {
 
       .content {
         display: flex;
-        flex-wrap: wrap;
       }
 
       .left-column {
@@ -108,8 +98,8 @@ const project = {
         height: 100%;
       }
 
-      .description p {
-        font-size: 1rem;
+      .description{
+        font-size: .8rem;
         line-height: 1.6;
         margin-bottom: 1rem;
       }
@@ -117,6 +107,7 @@ const project = {
       .bullet-points ul {
         list-style-type: disc;
         padding-left: 1.5rem;
+        padding-bottom: 1.5rem;
       }
 
       .bullet-points li {
@@ -126,9 +117,6 @@ const project = {
       }
 
       @media (max-width: 768px) {
-        .content {
-          flex-direction: column;
-        }
 
         .left-column,
         .right-column {
@@ -140,48 +128,58 @@ const project = {
         }
       }
     </style>
-  </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>{project.title}</h1>
-        <a href="{project.link}" target="_blank" rel="noopener">View Project</a>
-        <p>Collaborator: {project.collaborator}</p>
-        <p>Team: {project.Team}</p>
+        <h1>{title}</h1>
+        <a href= {link} target="_blank" rel="noopener">View Project</a>
+        {collaborator && <p>Collaborator: {collaborator}</p>}
+        <p>Team: {Team}</p>
       </div>
       <div class="content">
-        <div class="left-column">
-          <!-- Images -->
-          {project.images.map((image) => (
-            <div class="images">
-              <img src={image} alt="Project Image" />
-            </div>
-          ))}
 
-          <!-- YouTube Video -->
-          {project.videoUrl && (
-            <div class="video">
-              <iframe
-                src={project.videoUrl}
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
-          )}
-        </div>
+        {(images.length > 0 || videoUrl) && (
+          <div class="left-column">
+
+            <!-- YouTube Video -->
+            {videoUrl && (
+              <div class="video">
+                <iframe
+                  src={videoUrl}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            )}
+
+            <!-- Images -->
+            {images.map((image: string) => (
+              <div class="images">
+                <img src={`Projects/${image}`} alt="Project Image" />
+              </div>
+            ))}
+          </div>
+        )}
+        
         <div class="right-column">
-          <div class="description" set:html={project.description}></div>
           <div class="bullet-points">
-            <h2>Key Points</h2>
             <ul>
-              {project.bulletPoints.map((point) => (
+              {bulletPoints.map((point: string) => (
                 <li>{point}</li>
               ))}
             </ul>
           </div>
+          <div class="description" set:html={description}></div>
+
         </div>
       </div>
+
+      {inProgress && (
+        <div class="in-progress header">
+          <h2>In Progress</h2>
+          <p>This project is still in progress. Check back later for updates!</p>
+        </div>
+      )}
     </div>
   </body>
-</html>

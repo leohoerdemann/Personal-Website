@@ -1,134 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Contact - Leo Hoerdemann</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Verdana', sans-serif;
-        background: #f5f5f5;
-        color: #333;
-      }
+<style>
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 30vw;
+    margin: 0 auto;
+    padding: 2vh 2vw;
+    background: #fff;
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 1.5vh; /* Base font size */
+    flex-wrap: nowrap;
+  }
+  .left {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    padding-right: 1vw; /* Reduced space */
+    
+  }
 
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 400px;
-        padding: 1rem;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        align-items: center;
-      }
+  .left ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 
-      .left {
-        flex: 1 1 100%;
-        padding: 1rem;
-      }
+  .left ul li {
+    margin-bottom: 1vh;
+  }
 
-      .left ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
+  .left ul li a {
+    text-decoration: none;
+    color: #0066cc;
+    font-size: 1em; /* Relative to base font size */
+    display: flex;
+    align-items: center;
+  }
 
-      .left ul li {
-        margin-bottom: 0.5rem;
-      }
+  .left ul li a img {
+    width: 2.5vh; /* Scales with viewport height */
+    height: auto;
+    margin-right: 0.5vh;
+  }
 
-      .left ul li a {
-        text-decoration: none;
-        color: #0066cc;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-      }
+  .left ul li a:hover {
+    text-decoration: underline;
+  }
 
-      .left ul li a img {
-        width: 24px;
-        height: 24px;
-        margin-right: 0.5rem;
-      }
+  .right {
+    flex: 1 1 100%;
+    padding: 2vh 2vw;
+    text-align: center;
+    box-sizing: border-box;
+    text-align: left;
+    padding-left: 1vw; /* Reduced space */
+  }
 
-      .left ul li a:hover {
-        text-decoration: underline;
-      }
+  .right h1 {
+    font-size: 2em; /* Scales with viewport height */
+    margin: 0;
+    color: #333;
+  }
+  
+</style>
 
-      .right {
-        flex: 1 1 100%;
-        padding: 1rem;
-        text-align: center;
-      }
-
-      .right h1 {
-        font-size: 2rem;
-        margin: 0;
-        color: #333;
-      }
-
-      @media (min-width: 600px) {
-        .container {
-          flex-wrap: nowrap;
-        }
-
-        .left,
-        .right {
-          flex: 1 1 50%;
-        }
-
-        .left {
-          text-align: right;
-          padding-right: 2rem;
-        }
-
-        .right {
-          text-align: left;
-          padding-left: 2rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="left">
-        <ul>
-          <li>
-            <a href="https://github.com/leohoerdemann">
-              <img src="/linktree/github.svg" alt="GitHub Icon" />
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/l30-h/">
-              <img src="/linktree/linkedin.svg" alt="LinkedIn Icon" />
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a href="https://leohoerdemann.itch.io/">
-              <img src="/linktree/game.svg" alt="Itch.io Icon" />
-              Itch.io
-            </a>
-          </li>
-          <li>
-            <a href="tel:3315514882">
-              <img src="/linktree/id.svg" alt="Phone Icon" />
-              Phone
-            </a>
-          </li>
-          <li>
-            <a href="mailto:leo.h.trip@gmail.com">
-              <img src="/linktree/id.svg" alt="Email Icon" />
-              Email
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="right">
-        <h1>Leo Hoerdemann</h1>
-      </div>
-    </div>
-  </body>
-</html>
+<div class="container">
+  <div class="left">
+    <ul>
+      <li>
+        <a href="https://github.com/leohoerdemann" target="_blank">
+          <img src="/linktree/github.svg" alt="GitHub Icon" />
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/l30-h/" target="_blank">
+          <img src="/linktree/linkedin.svg" alt="LinkedIn Icon" />
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href="https://leohoerdemann.itch.io/" target="_blank">
+          <img src="/linktree/game.svg" alt="Itch.io Icon" />
+          Itch.io
+        </a>
+      </li>
+      <li>
+        <a href="tel:3315514882">
+          <img src="/linktree/id.svg" alt="Phone Icon" />
+          Phone
+        </a>
+      </li>
+      <li>
+        <a href="mailto:leo.h.trip@gmail.com" target="_blank">
+          <img src="/linktree/id.svg" alt="Email Icon" />
+          Email
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="right">
+    <h1>Leo Hoerdemann</h1>
+  </div>
+</div>
