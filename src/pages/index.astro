@@ -1,5 +1,4 @@
 ---
-import MobileLayout from "../layouts/MobileLayout.astro";
 import DesktopLayout from "../layouts/DesktopLayout.astro";
 
 // Server-side user-agent detection
@@ -19,9 +18,12 @@ const isMobile = /mobile/i.test(userAgent);
   </script>
 </head>
 
-{isMobile && hasJsEnabled ? (
-  // Render MobileLayout for mobile devices
-  <MobileLayout />
+{isMobile || !hasJsEnabled ? (
+    // Redirect to Linktree for mobile devices with JavaScript enabled
+    <script is:inline>
+      console.log('Redirecting to Linktree');
+      window.location.href = "linktree";
+    </script>
 ) : (
     // Render DesktopLayout for desktop devices
     <DesktopLayout />
