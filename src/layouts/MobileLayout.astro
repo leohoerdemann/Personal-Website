@@ -84,3 +84,139 @@ import '../styles/linktree.css';
         }
       });
 </script>
+
+<style>
+  /* General Styles */
+body{
+  background-color: #2a3235;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  margin-top: 30px;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+.profile-photo {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  margin-bottom: 10px;
+  border: 2px solid white;
+}
+
+.title {
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons Section */
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 50px;
+  width: 100%;
+  align-items: center;
+}
+
+.link-btn {
+  background-color: #fff;
+  color: #2c2c2c;
+  padding: 1.35rem;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: calc(1.1rem + .5vw); /* Responsive font size */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Keeps the text centered */
+  width: 100%;
+  max-width: 600px; /* Maximum width */
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.link-btn .icon {
+  margin-right: 10px;
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  left: 10px; /* Align icon to the far left */
+}
+
+.link-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: #2c2c2c;
+  position: relative;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+.download-btn {
+  background-color: #777;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.download-btn:hover {
+  background-color: #555;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .link-btn {
+    max-width: 100%; /* Full width on mobile */
+  }
+}
+</style>
