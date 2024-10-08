@@ -2,4 +2,30 @@
 import ProjectTemplate from "../ProjectTemplate.astro";
 ---
 
-<ProjectTemplate/>
+<ProjectTemplate
+    title= "Reddit Sentiment Analysis Stock Trading"
+    link= "https://github.com/leohoerdemann/482-Reddit-Trading-Project"
+    Team= "Leo Hoerdemann, Kanden Cho"
+
+    images = {["Reddit/R1.png", "Reddit/R1.png"]}
+
+    bulletPoints= {[
+        "Collected posts from a variety of subreddits relating to investing over the course of a month in a MongoDB database",
+        "Assigned a sentiment value for each post using Keras, with the sentiment value used it to run a stock trading simulation",
+        "Running the simulation with real world stock values resulted in a 7% return"
+
+    ]}
+
+    description = {`
+        <p>Reddit Sentiment Analysis Stock Trading is a project that I worked on with Kanden Cho for our CSE 482 class. 
+        Online it is common to see a variety of investing advice. It's tempting to want to follow this advice due to the nature and complexity of understanding the market. One community that has become notorious in this category is reddit and its subreddits wallstreetbets, superstonk, investing, and stocks. 
+        We wanted to see how accurate these communities are in knowing the market and how they compare to their very off the wall reputation. More specifically, we wanted to see if we could use the advice given on these subreddits to try and make money in the real world. </p>
+        
+        <p>In the project we used the reddit API via the PRAW to collect the top 100 posts from the subreddits wallstreetbets, superstonk, investing, stocks every day between February 26th to March 28th. We then stored the posts' title, content, number of upvotes, url, subreddit, and the time and date that it was created. This was all stored in a mongoDB server ran locally on one of our laptops. After all of the data collection we used Tensorflow/Keras to train and run sentiment analysis giving each post in the database and sentiment score from -1 to 1 with 1 being extremely positive and -1 being extremely negative. Based on those scores we created and ran a stock simulation. We assumed that if a post had a positive sentiment that we would buy a stock on that day, provided we had cash, and if it had a negative sentiment we would sell one share if we had any. We used real stock data provided by the yahoo finance python API to make sure our simulation was accurate. </p>
+        
+        <p> The first photo shows the average sentiment seen on the 4 subreddits each day. Each line indicates one of the two sentiment models we ran on the database. As shown above the average sentiment hovers around -0.2 to -0.4 except for two occasions. While this range indicates a fairly negative sentiment being echoed by reddit it is not a sentiment that is completely downtrodden. However there are two spikes in the data where the average sentiment goes up. For the first spike this was right around when the Federal reserve made a positive announcement causing talk to be more upbeat. For the second and much larger spike this was around when Nvidia (NVDA) hit a market cap of 2 trillion USD. This obviously caused a lot of hype and excitement especially in these communities which had a lot of investment in said stock. </p>
+
+        <p>The second photo shows the portfolio value over time. We gave the simulation a starting cash balance of 10,000 USD to make the trades and we see the portfolio value start there but quickly grow. At its peak our simulated portfolio hits almost 10,700 USD and it is sitting around there by the end. This means that in the month that we ran this we earned 700 USD off of our model or a return of 7%. Compare this to the S&P 500 which was only up 5% in the same time frame. We were very surprised to see this happen. Given the reputation that reddit investment advice had we expect our simulation to lose money however it not only made money it outperformed the S&P 500. We do believe that given more time the Simulation most likely would not continue this growth, especially since most of the simulations purchases were in Nvidia which is seeing an extreme boom right now. </p>
+
+        `}
+/>

@@ -2,4 +2,21 @@
 import ProjectTemplate from "../ProjectTemplate.astro";
 ---
 
-<ProjectTemplate/>
+<ProjectTemplate
+    title="Youtube Music Electron App with Discord Rich Presence"
+    link="https://github.com/leohoerdemann/Youtube_Music_Discord_Status"
+    Team="Leo Hoerdemann"
+
+    images = {["YoutubeDis/YD1.png","YoutubeDis/YD2.png"]}
+
+    bulletPoints={[
+        "Wanted a way to learn electron",
+        "Built using Electron and Discord's Rich Presence API to display the song name, artist, and album art on status",
+        "Complete with full installer that adds the app to the start menu and can be used from there"
+    ]}
+
+    description= {`
+        <p> I wanted to learn how to use electron and thought a good way to do that would be to create a desktop app that would display the current song playing on youtube music. I wanted to make it especially since a lot of people I know use youtube music but wish it shared what you're currently listening to the same way spotify did. </p>
+        
+        <p> The app is built using electron and the discord rich presence API. The app itself simply displays the youtube music website while using media sessions to get the current song playing. The app then sends that information to discord to display the song name, artist, album art, and progress on your status. It will also show the album name when hovering over the album art.</p>`}
+/>

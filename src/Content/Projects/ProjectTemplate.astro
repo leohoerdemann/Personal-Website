@@ -1,7 +1,7 @@
 ---
 const{
   title = 'Project Title',
-  link = 'https://example.com',
+  link,
   collaborator,
   Team = 'Team Name',
   images = [],
@@ -10,11 +10,7 @@ const{
     <p>Your project description goes here. Include detailed paragraphs explaining the project.</p>
     <p>You can add multiple paragraphs for more information.</p>
   `,
-  bulletPoints = [
-    'First key point about the project.',
-    'Second key point about the project.',
-    'Another important aspect of the project.',
-  ],
+  bulletPoints = [],
 
   inProgress = false,
 } = Astro.props;
@@ -23,7 +19,7 @@ const{
     <style>
 
       .container {
-        max-width: 1200px;
+        max-width: 55vw;
         margin: 0 auto;
         padding: 2rem;
         background: #fff;
@@ -73,10 +69,14 @@ const{
 
       .images {
         margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
       }
 
       .images img {
-        width: 100%;
+        max-width: 100%;
+        max-height: 300px;
         border-radius: 5px;
         margin-bottom: 1rem;
       }
@@ -107,7 +107,7 @@ const{
       .bullet-points ul {
         list-style-type: disc;
         padding-left: 1.5rem;
-        padding-bottom: 1.5rem;
+        padding-bottom: 1rem;
       }
 
       .bullet-points li {
@@ -132,7 +132,7 @@ const{
     <div class="container">
       <div class="header">
         <h1>{title}</h1>
-        <a href= {link} target="_blank" rel="noopener">View Project</a>
+        {link && <a href={link} target="_blank" rel="noopener">View Project</a>}
         {collaborator && <p>Collaborator: {collaborator}</p>}
         <p>Team: {Team}</p>
       </div>
@@ -154,11 +154,13 @@ const{
             )}
 
             <!-- Images -->
+            <div class="images">
             {images.map((image: string) => (
-              <div class="images">
+              
                 <img src={`Projects/${image}`} alt="Project Image" />
-              </div>
+              
             ))}
+            </div>
           </div>
         )}
         
