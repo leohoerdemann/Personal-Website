@@ -3,36 +3,181 @@ import DesktopIcon from '../components/DesktopIcon.astro';
 import Window from '../components/Window.astro';
 import Taskbar from '../components/Taskbar.astro';
 import User from '../Content/User.astro';
+
+// the content of the pages
 import AboutMe from '../Content/AboutMe.astro';
+import Resume from '../Content/Resume.astro';
+
+import Selector from '../Content/Projects/Selector.astro';
+import ProjectShell from '../Content/Projects/ProjectShell.astro';
+
+// import the games
+import Breakout from '../Content/Breakout.astro';
+import Paint from '../Content/Paint.astro';
 ---
 
 
 
 <head>
+    <title>Leo Hoerdemann</title>
+    <link rel="icon" href="Icons/user.png" />
     <link rel="stylesheet" href="https://unpkg.com/7.css"/>
     <script src="../Scripts/WindowStates/Drag.js"></script>
+    <script src= "../Scripts/WindowStates/open.js"></script>
+    <script src="../Scripts/WindowStates/close.js"></script>
+    <script src="../Scripts/WindowStates/resize.js"></script>
+    <script src="../Scripts/WindowStates/active.js"></script>
+    <script src="../Scripts/WindowStates/minimizeWindow.js"></script>
+    <script src="../Scripts/WindowStates/maximizeWindow.js"></script>
 </head>
 <body>
   <div class="desktop">
-      <Window title="User"> 
+    <!-- Desktop Icons -->
+     <div class="desktop-icons">
+    <DesktopIcon 
+      title="User" 
+      icon="Icons/user.png" 
+      windowId="User"
+      y="0"
+    />
+
+    <DesktopIcon 
+      title="Projects" 
+      icon="Icons/file.png" 
+      windowId="Projects"
+      y="10"
+    />
+
+    <DesktopIcon 
+      title="Transcript" 
+      icon="Icons/browse.png" 
+      windowId="Transcript"
+      y="20"
+      link = "pdfs/Leo Hoerdemann Transcript.pdf"
+    />
+
+    <DesktopIcon 
+      title="Resume" 
+      icon="Icons/attachment.png" 
+      windowId="Resume"
+      y="30"
+    />
+
+    <DesktopIcon 
+      title="Breakout" 
+      icon="Icons/games.png" 
+      windowId="Breakout"
+      y="40"
+    />
+
+    <DesktopIcon 
+      title="Paint" 
+      icon="Icons/pen.png" 
+      windowId="Paint"
+      y="50"
+    />
+    </div>
+
+
+    <!-- Windows -->
+      <Window 
+      title="User"
+      x="8"
+      y="4"
+      Width="23"
+      Height="25"
+      icon="Icons/user.png"
+      > 
         <User />
       </Window>
 
-      <Window title="About Me" Width="50">
+      <Window 
+      title="User" 
+      Width="60"
+      Height="50"
+      x="35"
+      y="12"
+      icon="Icons/user.png"
+      number="2"
+      >
         <AboutMe />
-        </Window>
-      <Taskbar />
+      </Window>
+
+      <Window
+      title="Resume"
+      Width="50"
+      Height="85"
+      x="40"
+      y="5"
+      icon="Icons/attachment.png"
+      hidden="hidden"
+      >
+        <Resume />
+      </Window>
+
+      <Window
+      title="Projects"
+      Width="20"
+      Height="60"
+      x="10"
+      y="20"
+      icon="Icons/file.png"
+      hidden="hidden"
+      >
+        <Selector />
+      </Window>
+
+
+      <Window
+      title="Projects"
+      number="2"
+      Width="57"
+      Height="60"
+      x="40"
+      y="20"
+      icon="Icons/file.png"
+      hidden="hidden"
+      >
+        <ProjectShell />
+    </Window>
+
+      <Window
+      title="Breakout"
+      Width="40"
+      Height="60"
+      x="30"
+      y="30"
+      icon="Icons/games.png"
+      hidden="hidden"
+      >
+       <Breakout /> 
+      </Window>
+
+      <Window
+      title="Paint"
+      Width="40"
+      Height="60"
+      x="33"
+      y="23"
+      icon="Icons/pen.png"
+      hidden="hidden"
+      >
+      <Paint />
+      </Window>
+
+    
   </div>
+  <!-- Taskbar -->
+  <Taskbar />
 </body>
 
 <style>
-  html{
+html{
     min-height: 100%;
-    background-image: url('WallPaper.jpg');
-
+    background-image: url('IMG_4846.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
-  }
+}
 </style>

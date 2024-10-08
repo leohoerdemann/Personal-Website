@@ -1,0 +1,27 @@
+---
+import ProjectTemplate from "../ProjectTemplate.astro";
+---
+
+<ProjectTemplate
+    title= "Video and Audio Processing Tool"
+    link="https://github.com/judecox/CSE471-Project1"
+    Team="Jude Cox, Alec Charney, Leo Hoerdemann, Ryan Chang, Kate Nagy"
+
+    images= {["CSE471/471(1).jpg", "CSE471/471(2).png"]}
+
+    bulletPoints={[
+        "Done as two projects in CSE 471, in order to learn about digital audio and video processing",
+        "Created processing tools built out of MFC applications in C++",
+        "Created tools suchs as video filters, motion tracking, audio effects, and audio generation"
+    ]}
+
+    description={`
+        <p> This was done as two projects in CSE 471 as a way to learn the basics of digital audio and video processing. The first project was focused on video processing and the second was focused on audio processing. </p>
+
+        <p> The first project linked above was a audio generation and effects system that would take in an xml file for a score and use it to output a song with Piano, sample playback for drums, a wavetable synth, and organ, and a few effects such as noise gate, compression, chorus, and a flanger </p>
+
+        <p> For the first project I created the organ. The organ I created replicated the tonewheels and drawbars of a Hammond organ. The organ had 9 drawbars that could be adjusted to change the volume of the harmonics of the organ. The user could also specify the attack and release of the organ as well as the intensity of the vibrato and leslie speaker effect. All parameters were set via the XML file. </p>
+
+        <p> The second project was a video processing tool that was done on my own. This tool would take in a video file and apply a green screen effect to it. The tool will also look for a blue tracking dot on the user's face in order to apply a south park style mask that will automatically follow the user's face and open and close the mouth based on the amplitude of the audio. </p>
+        `}
+/>

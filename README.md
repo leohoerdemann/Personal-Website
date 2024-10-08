@@ -1,0 +1,1 @@
+this is my personal website I use as a portfolio. It is built using astro and 7.css. It has two modes. One will just show a linktree like view and the other look/acts like a windows 7 desktop. It will load the differnt options based on if your on mobile or not

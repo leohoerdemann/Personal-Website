@@ -1,0 +1,189 @@
+---
+const finishedProjects = [
+  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1"},
+  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2"},
+  { id: "leobot", name: 'ChatGPT Powered Chat Bot', num: "3"},
+  { id: "portfolio", name: 'Portfolio Website (This!)', num: "4" },
+  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5"},
+  { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence', num: "6" },
+  { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading', num: "7" },
+  { id: "cse471", name: 'Video and Audio Processing Tool', num: "8" },
+  { id: "cse476", name: 'Location Based Android App with Webserver', num: "9" },
+  { id: "shadows", name: 'Unity Based VR Game (Shadows of Nyx)', num: "10" },
+];
+
+const inProgressProjects = [
+  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11"},
+  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12"},
+  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)', num: "13"},
+  { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method', num: "14"},
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e5e5e5;
+        color: #000;
+      }
+
+      .container {
+        max-width: 50vw;
+        margin: 0 auto;
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px solid #c8c8c8;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+      }
+
+      .list-view {
+        width: 100%;
+        overflow: auto;
+      }
+
+      .list-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        border-bottom: 1px solid #e5e5e5;
+        cursor: pointer;
+      }
+
+      .list-item:last-child {
+        border-bottom: none;
+      }
+
+      .list-item:hover {
+        background-color: #cfe8fc;
+      }
+
+      .list-item-icon {
+        margin-right: 0.5rem;
+        height: 1.6875rem;;
+        width: 1.6875rem;;
+      }
+
+      .list-item-icon-frame {
+        height: 2.375rem;;
+        width: 2.375rem;;
+      }
+
+      .list-item-text {
+        margin-left: 1rem;
+        flex: 1;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 1rem;
+          padding: 0.5rem;
+        }
+
+        h1 {
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <!-- Finished Projects Section -->
+        <div class="section">
+          <h1>Past Projects</h1>
+          <div class="list-view">
+            {finishedProjects.map((project) => (
+              <div
+                class="list-item"
+                data-project= {project.id}
+              >
+              
+              <div style="position: relative; width: 40px; height: 40px;">
+                    <img
+                      src={`./pfp/pfp (${project.num}).bmp`} 
+                      alt="Project Icon"
+                      class="list-item-icon"
+                      style="position: absolute; top: 5.5px; left: 5.5px;"
+                    />
+                    <img
+                      src="frame.png"
+                      alt="Project Icon Frame"
+                      class="list-item-icon-frame"
+                      style="position: absolute; top: 0; left: 0;"
+                    />
+                    </div>
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Projects in Progress Section -->
+        <div class="section">
+          <h1>Projects Still in Progress</h1>
+          <div class="list-view">
+            {inProgressProjects.map((project) => (
+              <div
+                class="list-item"
+                data-project= {project.id}
+              >
+                    <div style="position: relative; width: 2.5rem; height: 2.5rem;">
+                    <img
+                      src={`./pfp/pfp (${project.num}).bmp`} 
+                      alt="Project Icon"
+                      class="list-item-icon"
+                      style="position: absolute; top: 0.34375rem; left: 0.34375rem"
+                    />
+                    <img
+                      src="frame.png"
+                      alt="Project Icon Frame"
+                      class="list-item-icon-frame"
+                      style="position: absolute; top: 0; left: 0;"
+                    />
+                    </div>
+
+
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+    </div>
+
+    <script is:inline>
+      document.querySelectorAll('.list-item').forEach(item => {
+        item.addEventListener('click', () => {
+            handleProjectClick(item.dataset.project);
+        });
+      });
+
+
+      function handleProjectClick(project) {
+        const projectDiv = document.querySelector('#Projects[data-number="2"]').querySelector('.window-body');
+        const projectDivs = projectDiv.querySelectorAll('div');
+        projectDivs.forEach(div => {
+          if (div.classList.contains(project)) {
+            
+            div.classList.remove('hidden');
+          } else {
+            div.classList.add('hidden');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

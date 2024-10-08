@@ -1,0 +1,36 @@
+---
+import ProjectTemplate from "../ProjectTemplate.astro";
+---
+
+<ProjectTemplate
+    title= "UWM IT Datamart Microservice for Bitbucket"
+    link= "http://www.capstone.cse.msu.edu/2024-01/projects/uwm/"
+    collaborator= "Unite Wholesale Mortgage"
+    Team= "Jacob Meier, Ben Garvin, Leo Hoerdemann, Kanden Cho, Joe Tanquary"
+
+    description= {`
+       <p>Headquartered in Pontiac, Michigan, UWM provides mortgage products and services to mortgage brokers all over the country and is currently the top wholesale and mortgage lender in the United States.<p>
+
+<p>To support their daily operations, UWM's technical production is massive and in a constant state of change. With thousands of lines of code changing every day, production and deployment issues arise. Finding these bugs can be difficult, time-consuming, and may slow down progress.</p>
+
+<p>Our IT Datamart Microservice for BitBucket tool solves this problem by providing a way for managers to identify potential issues and predict where future problems may occur.</p>
+
+<p>As software engineers make changes to UWM's BitBucket code repositories, our tool collects data about the changes. The data collected includes the number of commits to a branch or repository per day, the IDs of developers who contributed to a given branch, how much was contributed, when it was contributed, dependencies of the project, and more.</p>
+
+<p>Once gathered, the data is then displayed on our web dashboard. The dashboard presents various diagrams for UWM employees to view. This enables managers to view information regarding thousands of code changes across the company at a glance.</p>
+
+<p>Managers can then use this data to identify potential issues and predict where future problems may occur. This aids in improving code quality and preventing future bugs.</p>
+
+<p>I handled the business logic which funtioned as a microservice written in C#. It is hosted on a Docker container within UWM's larger server systems. In a separate container is our website written in ReactJS, which, along with the C# logic, communicates with Microsoft SQL Server to update UI elements and provide current and useful information.</p>
+        `}
+
+    images ={["UWM/artwork-1.png", "UWM/artwork-1.png"]}
+
+    bulletPoints={[
+        'Developed a microservice in C# to collect data from BitBucket repositories.',
+        'Created a ReactJS website to display data in a user-friendly way.',
+        'Utilized Microsoft SQL Server to store and retrieve data.',
+        'Designed a user-friendly dashboard for managers to view data.',
+        'Implemented a Docker container to host the microservice and website.'
+    ]}
+/>

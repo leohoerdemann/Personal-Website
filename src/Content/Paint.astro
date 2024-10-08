@@ -1,0 +1,140 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Basic MS Paint Clone</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e5e5e5;
+      }
+
+      .toolbar {
+        background-color: #f0f0f0;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #c8c8c8;
+      }
+
+      .toolbar button {
+        margin-right: 1rem;
+        padding: 0.3rem 1rem;
+      }
+
+      .toolbar input[type='color'],
+      .toolbar input[type='range'] {
+        margin-right: 1rem;
+        margin-left: 1rem;
+      }
+
+      #canvas {
+        display: block;
+        border: 1px solid #000;
+        background-color: #fff;
+        cursor: crosshair;
+        margin: 0 auto;
+      }
+
+      .container {
+        max-width: 30vw;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <button id="pencilButton">Pencil</button>
+        <button id="eraserButton">Eraser</button>
+        <label for="colorPicker">Color:</label>
+        <input type="color" id="colorPicker" value="#000000" />
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="20" value="5" />
+        <button id="clearButton">Clear</button>
+      </div>
+      <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+    <script is:inline>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      let painting = false;
+      let erasing = false;
+      let brushColor = document.getElementById('colorPicker').value;
+      let brushSize = document.getElementById('brushSize').value;
+
+      function startPosition(e) {
+        painting = true;
+        draw(e);
+      }
+
+      function finishedPosition() {
+        painting = false;
+        ctx.beginPath();
+      }
+
+      function draw(e) {
+        if (!painting) return;
+
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = erasing ? '#FFFFFF' : brushColor;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      }
+
+      // Event listeners
+      canvas.addEventListener('mousedown', startPosition);
+      canvas.addEventListener('mouseup', finishedPosition);
+      canvas.addEventListener('mouseout', finishedPosition);
+      canvas.addEventListener('mousemove', draw);
+
+      // Touch support
+      canvas.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        startPosition(e.touches[0]);
+      });
+      canvas.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        finishedPosition();
+      });
+      canvas.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+        draw(e.touches[0]);
+      });
+
+      // Toolbar actions
+      document.getElementById('colorPicker').addEventListener('change', function (e) {
+        brushColor = e.target.value;
+      });
+
+      document.getElementById('brushSize').addEventListener('change', function (e) {
+        brushSize = e.target.value;
+      });
+
+      document.getElementById('clearButton').addEventListener('click', function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+
+      document.getElementById('pencilButton').addEventListener('click', function () {
+        erasing = false;
+      });
+
+      document.getElementById('eraserButton').addEventListener('click', function () {
+        erasing = true;
+      });
+    </script>
+  </body>
+</html>

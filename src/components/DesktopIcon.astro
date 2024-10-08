@@ -1,7 +1,83 @@
 ---
-const { icon, name, x, y, link} = Astro.props;
+const { icon, title, x = 0, y = 0, link="", windowId } = Astro.props;
 ---
+<div 
+  class={`desktop-icon ${link === "" ? "" : "override"}`}
+  data-id = {windowId}
+  data-link = {link}
+  style={`left: ${x}%; top: ${y}%;`} 
+  tabindex="0"
+>
 
-<div class="desktop-icon" style={`left: ${x}px; top: ${y}px;`}>
-    <img src={icon} alt={name} />
-</div> 
+  <img src={icon} alt={`${title} icon`}/>
+  <div class="icon-title">{title}</div>
+</div>
+
+<style>
+.desktop-icon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: clamp(0.25vh, 5px, 0.37vh); 
+  height: clamp(7vh, 85px, 9.5vh);        
+  width: clamp(7vh, 85px, 9.5vh);          
+}
+
+.desktop-icon img {
+  width: clamp(4.63vh, 63px, 7vh);      
+  height: clamp(4.63vh, 63px, 7vh);      
+  z-index: -1;
+}
+
+.icon-title {
+  color: #fff;
+  font-size: clamp(1.2vh, 15px, 1.5vh);    /* Font size scaled between ~14px and ~20px */
+  font-family: "Segoe UI", sans-serif;
+  text-shadow: 0 0 clamp(0.5vh, 5px, 0.7vh) rgba(0, 0, 0, 1);  /* Text shadow scales smoothly */
+  display: flex;
+  align-items: center;
+  white-space: pre-line;
+  text-align: center;
+  margin-top: clamp(0.34vh, 5px, 0.44vh);  /* Top margin for spacing */
+}
+
+
+  .desktop-icon:hover::before,
+  .desktop-icon:hover::after {
+    content: "";
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--button-shadow);
+    background: var(--control-background);
+    opacity: .5;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(.1px);
+}
+
+.desktop-icon:focus::before {
+    content: "";
+    position: absolute; /* Position the pseudo-elements absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--button-shadow);
+    background: var(--button-gradient-active);
+    opacity: .5;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(.1px);
+}
+
+
+
+
+</style>

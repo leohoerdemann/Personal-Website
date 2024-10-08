@@ -1,0 +1,25 @@
+---
+import ProjectTemplate from "../ProjectTemplate.astro";
+---
+
+<ProjectTemplate
+    title="Location Based Android App with Webserver"
+    link="https://github.com/leohoerdemann/CSE-476-Project-Server"
+    Team="Jude Cox, Jacob Stacy, Leo Hoerdemann, Caleb Story, Faith Dawson"
+
+    images={["CSE476/476(1).jpg", "CSE476/476(2).jpg", "CSE476/476(3).jpg", "CSE476/476(4).jpg"]}
+
+    bulletPoints={[
+        "Created an Android app that allows log their studing time on a leaderboard",
+        "Built a minimal api in ASP.Net to store and process user data in Google Firestore",
+        "Designed the app to be location based so that users can only log time in certain locations"
+    ]}
+
+    description={`
+        <p>For our final project in CSE 476 we wanted to create an app that would allow students to log their study time in a leaderboard. We wanted a way to encourage consistent study habbits via competition. However, in order to prevent cheating, we made it so times could only be logged if they were happening in particular areas such as libraries. </p>     
+
+        <p>Our app, <a href="https://github.com/leohoerdemann/CSE_476_Project_App" target="_blank">as seen here </a>, was built in Android Studio and used Google Firestore to store user data. I was in charge of building a minimal api in ASP.Net to handle the data processing to and from firestore. This was done so compute power could be saved on the user's device and instead could be all done in the cloud. Check out the project on GitHub</a>.</p>
+
+        <p>The webserver was hosted on Google cloud run within a docker container built in cloud build. This allowed us to have a scalable and secure server that could handle the data processing for the app. A user would start the timer on their device, and once done could save it to the global leaderboard. This would send the data to the server which would add it to the entries for a user's time both in total and for the week. From there users could go to a screen to see both leaderboards. The server would process the database entries and send over json content with the top users and their times to the device.</p>
+        `}
+/>

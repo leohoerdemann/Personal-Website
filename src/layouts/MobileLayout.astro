@@ -1,32 +1,83 @@
----
-const links = [
-  { name: 'About Me', url: '/about' },
-  { name: 'Portfolio', url: '/portfolio' },
-  // Add more links as needed
-];
----
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Leo Hoerdemann</title>
+    <link rel="icon" href="PageIcon.svg" />
+    <link rel="stylesheet" href="/src/styles/linktree.css">
+  </head>  
+  <body>
+    <main class="container">
+      <div class="profile-section">
+        <img src="profile2.jpg" alt="Profile Photo" class="profile-photo" />
+        <h1 class="title">Leo Hoerdemann</h1>
+      </div>
 
-<div class="mobile-layout">
-  {links.map(link => (
-    <a href={link.url} class="mobile-link">{link.name}</a>
-  ))}
-</div>
+      <div class="links-section">
+        <!-- My Info Button with SVG icon -->
+        <a href="#"  class="link-btn" id="myInfoButton" onclick="openInfoPopup()">
+          <img src="/linktree/id.svg" alt="Info Icon" class="icon" /> My Info
+        </button>
+        <!-- LinkedIn Button with SVG icon -->
+        <a href="https://www.linkedin.com/in/l30-h/" class="link-btn" target="_blank">
+          <img src="/linktree/linkedin.svg" alt="LinkedIn Icon" class="icon" /> LinkedIn
+        </a>
+        <!-- Resume Button with SVG icon -->
+        <a href="pdfs/Leo Hoerdemann Resume 2024.pdf" class="link-btn" target="_blank">
+          <img src="/linktree/news.svg" alt="Resume Icon" class="icon" /> Resume
+        </a>
+        <!-- GitHub Button with SVG icon -->
+        <a href="https://github.com/leohoerdemann" class="link-btn" target="_blank">
+          <img src="/linktree/github.svg" alt="GitHub Icon" class="icon" /> GitHub
+        </a>
+        <!-- Transcript Button with SVG icon -->
+        <a href="pdfs/Leo Hoerdemann Transcript.pdf" class="link-btn" target="_blank">
+          <img src="/linktree/license.svg" alt="Transcript Icon" class="icon" /> Transcript
+        </a>
+        <!-- Itch.io Button with SVG icon -->
+        <a href="https://leohoerdemann.itch.io/" class="link-btn" target="_blank">
+          <img src="/linktree/game.svg" alt="Itch.io Icon" class="icon" /> Itch.io
+        </a>
+        <!-- Sound Design Demo Reel Button with SVG icon -->
+        <a href="https://www.youtube.com/watch?v=lesPT-p6k3I" class="link-btn" target="_blank">
+          <img src="/linktree/speaker.svg" alt="Demo Reel Icon" class="icon" /> Sound Design Demo Reel
+        </a>
+      </div>
+    </main>
 
-<style>
-  .mobile-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    <!-- Info Popup Modal -->
+    <div id="info-popup" class="popup">
+      <div class="popup-content">
+        <button onclick="closeInfoPopup()" class="close-btn">&times;</button>
+        <h2>Leo Hoerdemann</h2>
+        <h4>Computer Science Graduate MSU</h4>
+        <p><a href="mailto:leo.h.trip@gmail.com">leo.h.trip@gmail.com </a> </p>
+        <p><a href="tel:+13315514882"> (331) 551-4882 </a></p>
+        <a href="vcard.vcf" download="leo_contact.vcf" class="download-btn">Save to Contacts</a>
+        
+      </div>
+    </div>
+    </body>
+</html>
+
+<script is:inline>
+  function openInfoPopup() {
+    console.log('Opening Info Popup');
+    const infoPopup = document.getElementById('info-popup');
+    if (infoPopup !== null) {
+      infoPopup.style.display = 'flex';
+    }
   }
-  .mobile-link {
-    margin: 10px 0;
-    padding: 15px 25px;
-    background-color: #0078d7;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    width: 80%;
+
+  function closeInfoPopup() {
+    const infoPopup = document.getElementById('info-popup');
+    if (infoPopup !== null) {
+      infoPopup.style.display = 'none';
+    }
   }
-</style>
+  const infoPopup = document.getElementById('info-popup');
+  window.addEventListener('click', function(event) {
+        if (event.target === infoPopup) {
+          infoPopup.style.display = 'none';
+        }
+      });
+</script>

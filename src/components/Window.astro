@@ -1,21 +1,205 @@
 ---
-// Props for component
-const { title = "New Window", Width = "12", x ,y} = Astro.props;
-
+const { title = "New Window", Width = "12", Height = "12", number = "1", hidden = "", x, y, icon} = Astro.props;
 ---
 
-<div class="window glass draggable" style= {`width: ${Width}vw; left: ${x}px; top: ${y}px;`}>
-    <div class="title-bar">
-      <div class="title-bar-text">{ title }</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
-      </div>
-    </div>
-    <div class="window-body">
-        <slot />
-    </div>
+<div id={title} 
+class={`window glass draggable ${hidden}`}
+data-prev-width={Width} 
+data-prev-height={Height} 
+data-prev-left={x} 
+data-prev-top={y} 
+data-maximized="false"
+data-number={number}
+style={`width: ${Width}vw; height: ${Height}vh; left: ${x}vw; top: ${y}vh;`}>
+<div class="title-bar">
+  <div class="title-bar-text"><img src = {icon}> {title}</div>
+  <div class="title-bar-controls">
+    <button class="minimize-button" aria-label="Minimize"></button> <!-- Minimize button triggers minimizeWindow -->
+    <button class="maximize-button" aria-label="Maximize"></button> <!-- Maximize button triggers maximizeWindow -->
+    <button class = "close-button" aria-label="Close"></button> <!-- Close button triggers toggleWindow -->
+  </div>
 </div>
 
+  <!-- Resizable borders -->
+  <div class="resize-handle top"></div>
+  <div class="resize-handle right"></div>
+  <div class="resize-handle bottom"></div>
+  <div class="resize-handle left"></div>
 
+  <!-- Diagonal corner handles -->
+  <div class="resize-handle top-left"></div>
+  <div class="resize-handle top-right"></div>
+  <div class="resize-handle bottom-left"></div>
+  <div class="resize-handle bottom-right"></div>
+
+  <!-- Window body with scaling content -->
+  <div class="window-body has-scrollbar">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .window {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .title-bar-text img {
+    max-height: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+    
+  }
+
+  .window-body {
+    /* Make sure the content scales when the window is resized */
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Resizing handles */
+  .resize-handle {
+    position: absolute;
+    z-index: 1;
+  }
+
+  .resize-handle.top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    cursor: ns-resize;
+  }
+
+  .resize-handle.right {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    cursor: ew-resize;
+  }
+
+  .resize-handle.bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    cursor: ns-resize;
+  }
+
+  .resize-handle.left {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    cursor: ew-resize;
+  }
+
+  /* Corner resize handles */
+  .resize-handle.top-left, .resize-handle.top-right, .resize-handle.bottom-left, .resize-handle.bottom-right {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    cursor: nwse-resize; /* Diagonal cursor */
+    z-index: 2;
+  }
+
+  .resize-handle.top-left {
+    top: 0;
+    left: 0;
+    cursor: nwse-resize;
+  }
+
+  .resize-handle.top-right {
+    top: 0;
+    right: 0;
+    cursor: nesw-resize;
+  }
+
+  .resize-handle.bottom-left {
+    bottom: 0;
+    left: 0;
+    cursor: nesw-resize;
+  }
+
+  .resize-handle.bottom-right {
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+  }
+
+
+  .hidden {
+    display: none;
+  }
+
+  .minimized {
+    display: none;
+  }
+
+  /* Windows 7 style animations */
+  @keyframes windowOpen {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes windowClose {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  .open-animation {
+    animation: windowOpen 0.1s ease-out;
+  }
+
+  .close-animation {
+    animation: windowClose 0.15s ease-in;
+  }
+
+  .minimize-animation {
+  animation: windowMinimize 0.3s forwards;
+}
+
+.unMini-animation {
+  animation: windowUnminimize 0.3s forwards;
+}
+
+@keyframes windowUnminimize {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translate(-100vw, 100vh);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes windowMinimize {
+  from {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5) translate(-100vw, 100vh);
+  }
+}
+
+</style>

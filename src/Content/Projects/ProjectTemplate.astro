@@ -1,0 +1,187 @@
+---
+const{
+  title = 'Project Title',
+  link,
+  collaborator,
+  Team = 'Team Name',
+  images = [],
+  videoUrl = '', // https://www.youtube.com/embed/VIDEO_ID
+  description = `
+    <p>Your project description goes here. Include detailed paragraphs explaining the project.</p>
+    <p>You can add multiple paragraphs for more information.</p>
+  `,
+  bulletPoints = [],
+
+  inProgress = false,
+} = Astro.props;
+---
+
+    <style>
+
+      .container {
+        max-width: 55vw;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 2rem;
+        white-space: pre-line;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header a {
+        color: #0066cc;
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+
+      .header a:hover {
+        text-decoration: underline;
+      }
+
+      .header p {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      .content {
+        display: flex;
+      }
+
+      .left-column {
+        flex: 1 1 40%;
+        padding-right: 1rem;
+      }
+
+      .right-column {
+        flex: 1 1 60%;
+        padding-left: 1rem;
+      }
+
+      .images {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .images img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .video {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .description{
+        font-size: .8rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .bullet-points ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        padding-bottom: 1rem;
+      }
+
+      .bullet-points li {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+
+        .left-column,
+        .right-column {
+          padding: 0;
+        }
+
+        .left-column {
+          margin-bottom: 2rem;
+        }
+      }
+    </style>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>{title}</h1>
+        {link && <a href={link} target="_blank" rel="noopener">View Project</a>}
+        {collaborator && <p>Collaborator: {collaborator}</p>}
+        <p>Team: {Team}</p>
+      </div>
+      <div class="content">
+
+        {(images.length > 0 || videoUrl) && (
+          <div class="left-column">
+
+            <!-- YouTube Video -->
+            {videoUrl && (
+              <div class="video">
+                <iframe
+                  src={videoUrl}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            )}
+
+            <!-- Images -->
+            <div class="images">
+            {images.map((image: string) => (
+              
+                <img src={`Projects/${image}`} alt="Project Image" />
+              
+            ))}
+            </div>
+          </div>
+        )}
+        
+        <div class="right-column">
+          <div class="bullet-points">
+            <ul>
+              {bulletPoints.map((point: string) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="description" set:html={description}></div>
+
+        </div>
+      </div>
+
+      {inProgress && (
+        <div class="in-progress header">
+          <h2>In Progress</h2>
+          <p>This project is still in progress. Check back later for updates!</p>
+        </div>
+      )}
+    </div>
+  </body>

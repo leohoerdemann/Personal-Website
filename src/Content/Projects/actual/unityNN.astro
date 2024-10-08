@@ -1,0 +1,23 @@
+---
+import ProjectTemplate from "../ProjectTemplate.astro";
+---
+
+<ProjectTemplate
+
+    title="Neural Network for Use as a Unity Input Method"
+    Team="Leo Hoerdemann"
+    link="https://github.com/leohoerdemann/Unity-Facial-Expression-NN"
+
+    bulletPoints={[
+        "Used to learn Unity's baracuda library",
+        "Utilizes Onnx models to recognize facial expressions",
+        "Used to expermint with using neural networks as well as alternative control methods"
+    ]}
+
+
+    description={`
+        <p>For this project I wanted to learn how to use Unity's baracuda library to implement a neural network. I decided to use a neural network to recognize facial expressions as a way to learn how to use the library. I used a pre-trained model from the Onnx model zoo to recognize the facial expressions. I then used this to select differnt options in game. This was done as a way to learn how to use neural networks in Unity as well as to experiment with alternative control methods.</p>
+    `}
+
+    inProgress={true}
+/>
