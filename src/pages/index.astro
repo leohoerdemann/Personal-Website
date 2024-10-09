@@ -4,7 +4,7 @@ import DesktopLayout from "../layouts/DesktopLayout.astro";
 // Server-side user-agent detection
 const userAgent = Astro.request.headers.get('user-agent') || '';
 const hasJsEnabled = Astro.request.headers.get('sec-ch-ua') !== null;
-const isMobile = /mobile/i.test(userAgent);
+const isMobile = /mobile/i.test(userAgent) && !/ipad/i.test(userAgent);
 ---
 <head>
   <!-- Google tag (gtag.js) -->
