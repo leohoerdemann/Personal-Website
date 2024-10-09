@@ -17,10 +17,7 @@ const isMobile = /mobile/i.test(userAgent);
   </script>
 </head>
 
-<noscript>
-    <h1>JavaScript is disabled</h1>
-    <p>Please enable JavaScript to view this website.</p>
-</noscript>
+
 
 {isMobile ? (
     // Redirect to Linktree for mobile devices with JavaScript enabled
@@ -32,3 +29,8 @@ const isMobile = /mobile/i.test(userAgent);
     // Render DesktopLayout for desktop devices
     <DesktopLayout />
 )}
+
+<noscript>
+  <h1>JavaScript is disabled</h1>
+  <p>Please enable JavaScript to view this website.</p>
+</noscript>
