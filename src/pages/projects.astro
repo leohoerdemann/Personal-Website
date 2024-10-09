@@ -1,0 +1,203 @@
+---
+import ProjectShell from "../Content/Projects/ProjectShell.astro";
+
+const finishedProjects = [
+  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1" },
+  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2" },
+  { id: "leobot", name: 'ChatGPT Powered Chat Bot', num: "3" },
+  { id: "portfolio", name: 'Portfolio Website (This!)', num: "4" },
+  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5" },
+  { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence', num: "6" },
+  { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading', num: "7" },
+  { id: "cse471", name: 'Video and Audio Processing Tool', num: "8" },
+  { id: "cse476", name: 'Location Based Android App with Webserver', num: "9" },
+  { id: "shadows", name: 'Unity Based VR Game (Shadows of Nyx)', num: "10" },
+];
+
+const inProgressProjects = [
+  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11" },
+  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12" },
+  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)', num: "13" },
+  { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method', num: "14" },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="PageIcon.svg">
+  <title>Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background-color: #fafafa;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+    }
+    .sidebar h3 {
+      margin-top: 20px;
+      margin-left: 20px;
+      color: #555;
+    }
+    .project-list {
+      padding: 0 20px 20px 20px;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+    .project-item {
+      cursor: pointer;
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+      color: #444;
+      transition: background-color 0.2s ease;
+    }
+    .project-item:last-child {
+      border-bottom: none;
+    }
+    .project-item:hover {
+      background-color: #f0f0f0;
+    }
+    /* Button for mobile */
+    .menu-button {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .menu-button:hover {
+      background-color: #f0f0f0;
+    }
+    .menu-button img {
+      width: 24px;
+      height: 24px;
+    }
+    /* Hide sidebar on mobile */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .menu-button {
+        display: block;
+      }
+      .container {
+        flex-direction: column;
+      }
+      .content {
+        padding: 20px;
+      }
+    }
+    @media (max-width: 480px) {
+      .project-item {
+        padding: 10px;
+        font-size: 14px;
+      }
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="menu-button" id="menuButton">
+      <img src="menu-icon.svg" alt="Menu">
+    </button>
+    
+    <div class="sidebar" id="sidebar">
+      <h3>Finished Projects</h3>
+      <div class="project-list">
+        {finishedProjects.map(project => (
+          <div class="project-item" data-project={project.id}>
+            {project.name}
+          </div>
+        ))}
+      </div>
+      <h3>In Progress Projects</h3>
+      <div class="project-list">
+        {inProgressProjects.map(project => (
+          <div class="project-item" data-project={project.id}>
+            {project.name}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="content" id="project-details">
+      <ProjectShell />
+    </div>
+  </div>
+
+  <script is:inline>
+    // Handle sidebar toggle
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('project-details');
+
+    menuButton.addEventListener('click', () => {
+      sidebar.classList.add('open');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+    });
+
+    // Existing project item click handler
+    document.querySelectorAll('.project-item').forEach(item => {
+      item.addEventListener('click', () => {
+        handleProjectClick(item.dataset.project);
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+        }
+      });
+    });
+
+    function handleProjectClick(project) {
+      const projectDiv = document.querySelector('#project-details');
+      const projectDivs = projectDiv.querySelectorAll('div');
+      projectDivs.forEach(div => {
+        if (div.classList.contains(project)) {
+          div.classList.remove('hidden');
+        } else {
+          div.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

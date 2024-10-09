@@ -19,7 +19,7 @@ const{
     <style>
 
       .container {
-        max-width: 55vw;
+        max-width: 60vw;
         margin: 0 auto;
         padding: 2rem;
         background: #fff;
@@ -117,6 +117,18 @@ const{
       }
 
       @media (max-width: 768px) {
+
+        .container
+        {
+          border-radius: 0;
+          max-width: 100%;
+          padding: .5rem;
+          box-shadow: none;
+        }
+
+        .content {
+          flex-direction: column;
+        }
 
         .left-column,
         .right-column {
