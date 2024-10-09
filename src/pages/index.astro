@@ -3,8 +3,7 @@ import DesktopLayout from "../layouts/DesktopLayout.astro";
 
 // Server-side user-agent detection
 const userAgent = Astro.request.headers.get('user-agent') || '';
-const hasJsEnabled = Astro.request.headers.get('sec-ch-ua') !== null;
-const isMobile = /mobile/i.test(userAgent) && !/ipad/i.test(userAgent);
+const isMobile = /mobile/i.test(userAgent);
 ---
 <head>
   <!-- Google tag (gtag.js) -->
@@ -18,7 +17,12 @@ const isMobile = /mobile/i.test(userAgent) && !/ipad/i.test(userAgent);
   </script>
 </head>
 
-{isMobile || !hasJsEnabled ? (
+<noscript>
+    <h1>JavaScript is disabled</h1>
+    <p>Please enable JavaScript to view this website.</p>
+</noscript>
+
+{isMobile ? (
     // Redirect to Linktree for mobile devices with JavaScript enabled
     <script is:inline>
       console.log('Redirecting to Linktree');
