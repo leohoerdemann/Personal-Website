@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // For desktop icons
   const desktopIcons = document.querySelectorAll('.desktop-icon');
   desktopIcons.forEach(icon => {
-    icon.addEventListener('dblclick', () => {
+    icon.addEventListener('click', () => { // changed from dblclick to click for easy of use
       if (icon.classList.contains('override')) {
         window.open(icon.dataset.link, '_blank');
       } else {

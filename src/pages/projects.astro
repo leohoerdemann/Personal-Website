@@ -1,24 +1,29 @@
 ---
 import ProjectShell from "../Content/Projects/ProjectShell.astro";
 
-const finishedProjects = [
-  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1" },
-  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2" },
-  { id: "leobot", name: 'ChatGPT Powered Chat Bot', num: "3" },
-  { id: "portfolio", name: 'Portfolio Website (This!)', num: "4" },
-  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5" },
-  { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence', num: "6" },
+const dataProjects = [
   { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading', num: "7" },
+];
+const csProjects = [
+  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1"}, 
+  { id: "leobot", name: 'ChatGPT Powered Chat Bot', num: "3"},
+  { id: "portfolio", name: 'Portfolio Website (This!)', num: "4" },
+  { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence', num: "6" },
   { id: "cse471", name: 'Video and Audio Processing Tool', num: "8" },
-  { id: "cse476", name: 'Location Based Android App with Webserver', num: "9" },
+  { id: "cse476", name: 'Location Based Android App with Web Server', num: "9" },
+];
+const gameProjects = [
+  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12"},
+  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2"},
+  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11"},
+  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5"},
   { id: "shadows", name: 'Unity Based VR Game (Shadows of Nyx)', num: "10" },
 ];
+const audioProjects = [];
 
 const inProgressProjects = [
-  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11" },
-  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12" },
-  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)', num: "13" },
-  { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method', num: "14" },
+  { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)', num: "13"},
+  { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method', num: "14"},
 ];
 ---
 
@@ -46,27 +51,41 @@ const inProgressProjects = [
       position: relative;
     }
     .sidebar {
-      width: 250px;
+      width: 240px;
       background-color: #ffffff;
       border-right: 1px solid #ddd;
       box-shadow: 2px 0 5px rgba(0,0,0,0.1);
       overflow-y: auto;
+      padding-top: 10px;
       transition: transform 0.3s ease;
     }
+
+    .sidebar-links {
+      display: none;
+    }
+
+    .sidebar-links a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .sidebar-links a:hover {
+      text-decoration: underline;
+    }
     .sidebar h3 {
-      margin-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 5px;
       margin-left: 20px;
       color: #555;
     }
     .project-list {
-      padding: 0 20px 20px 20px;
+      padding: 0 10px 10px 10px;
     }
     .content {
       flex-grow: 1;
-      padding: 40px;
+      padding: 20px;
       overflow-y: auto;
     }
-    .project-item {
+    .project-item, .project-item2{
       cursor: pointer;
       padding: 10px 15px;
       border-bottom: 1px solid #ddd;
@@ -83,14 +102,13 @@ const inProgressProjects = [
     .menu-button {
       display: none;
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 2px;
+      left: 2px;
       z-index: 1000;
-      background-color: #ffffff;
+      background: none;
       border: none;
       border-radius: 50%;
       padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
@@ -101,6 +119,25 @@ const inProgressProjects = [
       width: 24px;
       height: 24px;
     }
+
+    header {
+      background-color: #ffffff; 
+      padding: 10px; 
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+      z-index: 1000;
+    }
+
+    header a {
+      text-decoration: none;
+      color: inherit;
+    }
+    header a:hover {
+      text-decoration: underline;
+    }
+
     /* Hide sidebar on mobile */
     @media (max-width: 768px) {
       .sidebar {
@@ -119,36 +156,74 @@ const inProgressProjects = [
       .container {
         flex-direction: column;
       }
+
+      header {
+        display: none;
+      }
+
       .content {
-        padding: 20px;
+        padding: 0;
+      }
+
+      .sidebar-links {
+        display: block;
       }
     }
     @media (max-width: 480px) {
-      .project-item {
+      .project-item , .project-item2{
         padding: 10px;
         font-size: 14px;
-      }
-      .content {
-        padding: 15px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- header -->
+  <header>
+    <a href = "/linktree"> <h2 style="margin: 0;">Leo Hoerdemann</h2> </a>
+    <div>
+      <a href = "/linktree"><span style="font-size: 18px; padding-right: 15px;">Home</span></a>
+      <a href = "https://www.linkedin.com/in/l30-h/", target="_blank"><span style="font-size: 18px; padding-right: 15px;">LinkedIn</span></a>
+      <a href = "pdfs/Leo Hoerdemann Resume 2024.pdf", target="_blank"><span style="font-size: 18px; padding-right: 15px;">Resume</span></a>
+      <a href = "/projects"><span style="font-size: 18px; padding-right: 15px;">Projects</span></a>
+      <a href = "https://github.com/leohoerdemann", target="_blank"><span style="font-size: 18px; padding-right: 15px;">Github</span></a>
+      <a href = "https://leohoerdemann.itch.io/", target="_blank"><span style="font-size: 18px; padding-right: 15px;">Itch.io</span></a>
+    </div>
+  </header>
+
   <div class="container">
     <button class="menu-button" id="menuButton">
       <img src="menu-icon.svg" alt="Menu">
     </button>
     
     <div class="sidebar" id="sidebar">
-      <h3>Finished Projects</h3>
+      <h3>Game Projects</h3>
       <div class="project-list">
-        {finishedProjects.map(project => (
+        {gameProjects.map(project => (
           <div class="project-item" data-project={project.id}>
             {project.name}
           </div>
         ))}
       </div>
+
+      <h3>Software Development Projects</h3>
+      <div class="project-list">
+        {csProjects.map(project => (
+          <div class="project-item" data-project={project.id}>
+            {project.name}
+          </div>
+        ))}
+      </div>
+
+      <h3>Data Projects</h3>
+      <div class="project-list">
+        {dataProjects.map(project => (
+          <div class="project-item" data-project={project.id}>
+            {project.name}
+          </div>
+        ))}
+      </div>
+
       <h3>In Progress Projects</h3>
       <div class="project-list">
         {inProgressProjects.map(project => (
@@ -157,7 +232,33 @@ const inProgressProjects = [
           </div>
         ))}
       </div>
-    </div>
+
+      <div class="sidebar-links">
+        <h3>Links</h3>
+          <div class="project-list">
+            <div class="project-item2">
+              <a href="/linktree", target="_self">Home</a>
+            </div>
+            <div class="project-item2">
+              <a href="https://www.linkedin.com/in/l30-h/", target="_blank">LinkedIn</a>
+            </div>
+            <div class="project-item2">
+              <a href="pdfs/Leo Hoerdemann Resume 2024.pdf", target="_blank">Resume</a>
+            </div>
+            <div class="project-item2">
+              <a href="/projects", target="_self">Projects</a>
+            </div>
+            <div class="project-item2">
+              <a href="https://github.com/leohoerdemann", target="_blank">Github</a>
+            </div>
+            <div class="project-item2">
+              <a href="https://leohoerdemann.itch.io/", target="_blank">Itch.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div class="content" id="project-details">
       <ProjectShell />
     </div>
@@ -171,10 +272,15 @@ const inProgressProjects = [
 
     menuButton.addEventListener('click', () => {
       sidebar.classList.add('open');
+      menuButton.style.display = 'none';
+
     });
 
     overlay.addEventListener('click', () => {
       sidebar.classList.remove('open');
+      if (window.innerWidth <= 768) {
+        menuButton.style.display = 'block';
+      }
     });
 
     // Existing project item click handler
@@ -183,6 +289,21 @@ const inProgressProjects = [
         handleProjectClick(item.dataset.project);
         if (window.innerWidth <= 768) {
           sidebar.classList.remove('open');
+          menuButton.style.display = 'block';
+        }
+      });
+    });
+
+    // sidebar link click handler
+    document.querySelectorAll('.project-item2').forEach(item => {
+      item.addEventListener('click', () => {
+        const link = item.querySelector('a');
+        if (link) {
+          window.open(link.href, link.target);
+        }
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+          menuButton.style.display = 'block';
         }
       });
     });

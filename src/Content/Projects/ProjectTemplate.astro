@@ -184,7 +184,7 @@ const{
               ))}
             </ul>
           </div>
-          <div class="description" set:html={description}></div>
+          {Astro.slots.default ? <slot /> : <div class="description" set:html={description}></div>}
 
         </div>
       </div>
