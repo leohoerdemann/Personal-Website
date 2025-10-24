@@ -1,20 +1,26 @@
 ---
-const finishedProjects = [
-  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1"},
-  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2"},
+const dataProjects = [
+  { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading', num: "7" },
+];
+const csProjects = [
+  { id: "UWM", name: 'UWM IT Datamart Microservice for Bitbucket', num: "1"}, 
   { id: "leobot", name: 'ChatGPT Powered Chat Bot', num: "3"},
   { id: "portfolio", name: 'Portfolio Website (This!)', num: "4" },
-  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5"},
   { id: "youtubeDis", name: 'Youtube Music Electron App with Discord Rich Presence', num: "6" },
-  { id: "redditStock", name: 'Reddit Sentiment Analysis Stock Trading', num: "7" },
   { id: "cse471", name: 'Video and Audio Processing Tool', num: "8" },
   { id: "cse476", name: 'Location Based Android App with Web Server', num: "9" },
+];
+const gameProjects = [
+  { id: "daemon", name: 'Unreal Engine 5 Online Hero Shooter (Daemon)', num: "15"},
+  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12"},
+  { id: "chromakill", name: 'Unity Based First Person Movement Shooter (ChromaKill)', num: "2"},
+  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11"},
+  { id: "studio", name: 'Audio Design and Implementation (Spartasoft Studio)', num: "5"},
   { id: "shadows", name: 'Unity Based VR Game (Shadows of Nyx)', num: "10" },
 ];
+const audioProjects = [];
 
 const inProgressProjects = [
-  { id: "freakshow", name: 'Full Stack Development with Unity and Twitch (Freak Show)', num: "11"},
-  { id: "projectMercury", name: 'Unreal Engine 5 Based First Person Shooter (Project Mercury)', num: "12"},
   { id: "deitycell", name: 'Unity Based 2D Platformer and RPG (Deity Cell)', num: "13"},
   { id: "unityNN", name: 'Neural Network for Use as a Unity Input Method', num: "14"},
 ];
@@ -102,17 +108,75 @@ const inProgressProjects = [
   </head>
   <body>
     <div class="container">
-        <!-- Finished Projects Section -->
+        <!-- Game Projects Section -->
         <div class="section">
-          <h1>Past Projects</h1>
+          <h1>Game Projects</h1>
           <div class="list-view">
-            {finishedProjects.map((project) => (
+            {gameProjects.map((project) => (
               <div
                 class="list-item"
                 data-project= {project.id}
               >
               
               <div style="position: relative; width: 40px; height: 40px;">
+                    <img
+                      src={`./pfp/pfp (${project.num}).bmp`} 
+                      alt="Project Icon"
+                      class="list-item-icon"
+                      style="position: absolute; top: 5.5px; left: 5.5px;"
+                    />
+                    <img
+                      src="frame.png"
+                      alt="Project Icon Frame"
+                      class="list-item-icon-frame"
+                      style="position: absolute; top: 0; left: 0;"
+                    />
+                    </div>
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Computer Science Projects Section -->
+        <div class="section">
+          <h1>Software Development Projects</h1>
+          <div class="list-view">
+            {csProjects.map((project) => (
+              <div
+                class="list-item"
+                data-project= {project.id}
+              >
+                    <div style="position: relative; width: 40px; height: 40px;">
+                    <img
+                      src={`./pfp/pfp (${project.num}).bmp`} 
+                      alt="Project Icon"
+                      class="list-item-icon"
+                      style="position: absolute; top: 5.5px; left: 5.5px;"
+                    />
+                    <img
+                      src="frame.png"
+                      alt="Project Icon Frame"
+                      class="list-item-icon-frame"
+                      style="position: absolute; top: 0; left: 0;"
+                    />
+                    </div>
+                <div class="list-item-text">{project.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Data Projects Section -->
+        <div class="section">
+          <h1>Data Projects</h1>
+          <div class="list-view">
+            {dataProjects.map((project) => (
+              <div
+                class="list-item"
+                data-project= {project.id}
+              >
+                    <div style="position: relative; width: 40px; height: 40px;">
                     <img
                       src={`./pfp/pfp (${project.num}).bmp`} 
                       alt="Project Icon"

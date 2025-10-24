@@ -4,13 +4,17 @@ import ProjectTemplate from "../ProjectTemplate.astro";
 
 <ProjectTemplate
     title="Full Stack Development with Unity and Twitch (Freak Show)"
-    Team="Aidan Bieber, Bilal Saqib, Cherian Idicula, Chris Thorsen, Drew Zelenak, Tyberius Livingston, Jae Kittell \n Jack Warden, Keith Lerner, Nick Fraus, Luc Walz, Tyler Ziegenfelder, Mitch King, Leo Hoerdemann"
+    Team="Aidan Bieber, Bilal Saqib, Cherian Idicula, Chris Thorsen, Drew Zelenak, Tyberius Livingston, Jae Kittell, Jack Warden, Keith Lerner, Nick Fraus, Luc Walz, Tyler Ziegenfelder, Mitch King, Leo Hoerdemann"
 
     bulletPoints={[
         "Created a full stack application that players to interact with a Twitch chat",
         "Created the web server in ASP.Net and the website in React",
         "Designed the systems to scale with the number of viewers seen on Twitch"
     ]}
+
+    videoUrl="https://www.youtube.com/embed/_AYPUR4k-HQ?si=Xv2Ny1ks-f5trrmc"
+
+    link="https://bilalsaqib19.itch.io/freakshow"
 
 
     description={`
@@ -19,5 +23,4 @@ import ProjectTemplate from "../ProjectTemplate.astro";
         <p>For the project I was in charge of creating the web server and the website. The web server was made in ASP.Net and is used to manage all connections to prevent too much strain on the unity instance. The react app is used inside the twitch extension with buttons so users can vote and earn tokens to influence the game. The react app and the unity game each both make a websocket connection to the server. The server, hosted on Google cloud, can process all data sent over the connection and forward the new information to the correct location. It also has the ability to store data in Firestore as needed.</p>
         `}
 
-    inProgress={true}
 />
